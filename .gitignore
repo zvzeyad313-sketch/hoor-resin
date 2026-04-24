@@ -2,3 +2,5 @@ node_modules
 .specify
 .env.local
 .next
+# Local Netlify folder
+.netlify

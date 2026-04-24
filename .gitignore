@@ -1,0 +1,4 @@
+node_modules
+.specify
+.env.local
+.next

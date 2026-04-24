@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoor Resin Art | متجر الرزن</title>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Tajawal:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">✨ تم إضافة المنتج للسلة!</div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#" class="logo">Hoor <span>✦</span> Resin</a>
+    <ul class="nav-links">
+      <li><a href="#featured">المنتجات</a></li>
+      <li><a href="#custom">طلبات خاصة</a></li>
+      <li><a href="#about">من نحن</a></li>
+      <li><a href="#contact">تواصل معنا</a></li>
+    </ul>
+    <a href="#" class="nav-cart">🛒 السلة <span id="cart-count"
+        style="background:var(--rose);padding:2px 8px;border-radius:50px;font-size:0.75rem">0</span></a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="hero-text fade-up">
+      <div class="hero-tag"><span>✨</span> صنع بحب واهتمام</div>
+      <h1 class="hero-title">
+        قطع رزن <em>فريدة</em><br>تحكي قصتك
+      </h1>
+      <p class="hero-sub">
+        كل قطعة من Hoor Resin Art هي تحفة يدوية مصنوعة بعناية فائقة.
+        من المجوهرات إلى الإكسسوارات — نصمم اللي بتحلم بيه 💕
+      </p>
+      <div class="hero-btns">
+        <a href="#featured" class="btn-primary">تسوق الآن ✦</a>
+        <a href="#custom" class="btn-secondary">طلب خاص</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-showcase">
+        <div class="showcase-main">
+          <div class="showcase-inner">
+            <span class="resin-icon">🌸</span>
+            <p>Hoor Resin Art</p>
+          </div>
+        </div>
+        <div class="float-card card-1">
+          <div class="label">⭐ التقييم</div>
+          <div class="value">4.9 / 5</div>
+          <div class="sub">+200 عميل سعيد</div>
+        </div>
+        <div class="float-card card-2">
+          <div class="label">🎨 مخصص 100%</div>
+          <div class="value">يدوي الصنع</div>
+          <div class="sub">كل قطعة فريدة</div>
+        </div>
+        <div class="hero-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span>رزن يدوي</span><span class="dot">✦</span>
+      <span>مجوهرات فريدة</span><span class="dot">✦</span>
+      <span>إكسسوارات مخصصة</span><span class="dot">✦</span>
+      <span>هدايا مميزة</span><span class="dot">✦</span>
+      <span>صنع بحب</span><span class="dot">✦</span>
+      <span>Hoor Resin Art</span><span class="dot">✦</span>
+      <span>رزن يدوي</span><span class="dot">✦</span>
+      <span>مجوهرات فريدة</span><span class="dot">✦</span>
+      <span>إكسسوارات مخصصة</span><span class="dot">✦</span>
+      <span>هدايا مميزة</span><span class="dot">✦</span>
+      <span>صنع بحب</span><span class="dot">✦</span>
+      <span>Hoor Resin Art</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="featured" id="featured">
+    <div class="section-header fade-up">
+      <div class="section-label">✦ أحدث القطع</div>
+      <h2 class="section-title">منتجاتنا <em>المميزة</em></h2>
+    </div>
+
+    <div class="products-grid">
+      <!-- Product 1 -->
+      <div class="product-card fade-up">
+        <div class="product-img p-img-1">
+          <span class="emoji">💍</span>
+          <span class="product-badge badge-new">جديد</span>
+          <button class="product-wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">مجوهرات</div>
+          <div class="product-name">خاتم رزن الورد</div>
+          <div class="product-desc">خاتم رزن شفاف مع ورود مجففة طبيعية، متاح بمقاسات متنوعة</div>
+          <div class="product-bottom">
+            <div class="product-price"><span class="currency">ج.م </span>180</div>
+            <button class="btn-add" onclick="addToCart(this)">أضف للسلة +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card fade-up" style="transition-delay:0.1s">
+        <div class="product-img p-img-2">
+          <span class="emoji">🪬</span>
+          <span class="product-badge badge-sale">خصم</span>
+          <button class="product-wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">معلقات</div>
+          <div class="product-name">حرز رزن ذهبي</div>
+          <div class="product-desc">معلقة رزن بلون ذهبي لامع مع ورق ذهب داخلي يعكس الضوء</div>
+          <div class="product-bottom">
+            <div class="product-price"><span class="old">250</span><span class="currency">ج.م </span>190</div>
+            <button class="btn-add" onclick="addToCart(this)">أضف للسلة +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card fade-up" style="transition-delay:0.2s">
+        <div class="product-img p-img-3">
+          <span class="emoji">💜</span>
+          <button class="product-wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">تذكارات</div>
+          <div class="product-name">إطار صور رزن بنفسجي</div>
+          <div class="product-desc">إطار رزن بتدرجات البنفسجي يحتوي ورود مجففة مميزة</div>
+          <div class="product-bottom">
+            <div class="product-price"><span class="currency">ج.م </span>320</div>
+            <button class="btn-add" onclick="addToCart(this)">أضف للسلة +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card fade-up" style="transition-delay:0.3s">
+        <div class="product-img p-img-4">
+          <span class="emoji">🧊</span>
+          <span class="product-badge badge-new">جديد</span>
+          <button class="product-wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">ديكور</div>
+          <div class="product-name">كوستر رزن أزرق</div>
+          <div class="product-desc">طقم كوستر رزن بألوان المحيط الزرقاء، مناسب للهدايا</div>
+          <div class="product-bottom">
+            <div class="product-price"><span class="currency">ج.م </span>220</div>
+            <button class="btn-add" onclick="addToCart(this)">أضف للسلة +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card fade-up" style="transition-delay:0.1s">
+        <div class="product-img p-img-5">
+          <span class="emoji">📿</span>
+          <button class="product-wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">مجوهرات</div>
+          <div class="product-name">سوار رزن أخضر</div>
+          <div class="product-desc">سوار رزن بألوان الطبيعة الخضراء مع لمعة ذهبية رقيقة</div>
+          <div class="product-bottom">
+            <div class="product-price"><span class="currency">ج.م </span>150</div>
+            <button class="btn-add" onclick="addToCart(this)">أضف للسلة +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card fade-up" style="transition-delay:0.2s">
+        <div class="product-img p-img-6">
+          <span class="emoji">🌹</span>
+          <span class="product-badge badge-sale">خصم</span>
+          <button class="product-wishlist">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">هدايا</div>
+          <div class="product-name">علبة هدية رزن وردي</div>
+          <div class="product-desc">علبة هدية كاملة تحتوي على قطعتين رزن بألوان الوردي</div>
+          <div class="product-bottom">
+            <div class="product-price"><span class="old">450</span><span class="currency">ج.م </span>380</div>
+            <button class="btn-add" onclick="addToCart(this)">أضف للسلة +</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM ORDER -->
+  <section class="custom-section fade-up" id="custom">
+    <div class="custom-text" style="position:relative;z-index:1">
+      <div class="custom-label">✦ خدمة مميزة</div>
+      <h2 class="custom-title">نصنعلك <em>حلمك</em><br>بأيدينا 💕</h2>
+      <p class="custom-desc">
+        عايزة قطعة خاصة بيكِ؟ مكتوب عليها اسمك أو تاريخ مميز؟
+        احنا هنا عشان نحوّل كل فكرة في دماغك لقطعة رزن تحفة ✨
+      </p>
+      <a href="https://www.instagram.com/hoor_resin_" target="_blank" class="btn-light">تواصلي معانا 💬</a>
+    </div>
+    <div class="custom-visual">
+      <div class="custom-item">
+        <div class="icon">🎨</div>
+        <p>اختاري اللون والشكل</p>
+      </div>
+      <div class="custom-item">
+        <div class="icon">✍️</div>
+        <p>اكتبي اسمك أو رسالتك</p>
+      </div>
+      <div class="custom-item">
+        <div class="icon">🌸</div>
+        <p>اختاري التفاصيل</p>
+      </div>
+      <div class="custom-item">
+        <div class="icon">📦</div>
+        <p>يوصلك في 5-7 أيام</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why fade-up" id="about">
+    <div class="section-header">
+      <div class="section-label">✦ ليه Hoor</div>
+      <h2 class="section-title">لأننا <em>نهتم</em> بكل تفصيلة</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🤲</span>
+        <div class="why-title">صنع يدوي 100%</div>
+        <p class="why-desc">كل قطعة تتصنع بإيدينا بكل حب واهتمام، مفيش قطعتين زي بعض أبداً</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🌿</span>
+        <div class="why-title">خامات عالية الجودة</div>
+        <p class="why-desc">بنستخدم رزن وألوان عالمية آمنة وتدوم لسنين طويلة</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">💝</span>
+        <div class="why-title">تغليف مميز</div>
+        <p class="why-desc">كل طلب بيتغلف بعناية في علبة هدية جميلة، مناسب للهدايا الخاصة</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🚚</span>
+        <div class="why-title">توصيل لكل مكان</div>
+        <p class="why-desc">بنوصّل لكل محافظات مصر، والشحن متاح لجميع الأماكن</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials fade-up">
+    <div class="section-header">
+      <div class="section-label">✦ آراء عملاؤنا</div>
+      <h2 class="section-title">بيقولوا عنا <em>إيه؟</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">ربنا يبارك في الأيادي اللي صنعت الخاتم ده! جميل جداً وفاق توقعاتي بمراحل 😍 الشحن
+          كان سريع والتغليف تحفة</p>
+        <div class="testimonial-author">
+          <div class="avatar av-1">👩</div>
+          <div>
+            <div class="author-name">سارة محمد</div>
+            <div class="author-loc">📍 القاهرة</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">طلبت طلب خاص باسمي وجه أحلى من اللي تخيلته! البائع محترم ومتعاون وشرح كل التفاصيل 💕
+          هطلب تاني قريب</p>
+        <div class="testimonial-author">
+          <div class="avatar av-2">👩‍🦱</div>
+          <div>
+            <div class="author-name">نور أحمد</div>
+            <div class="author-loc">📍 الإسكندرية</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">اشتريت هدية لأختي وهي اتجننت! قالت عمرها ماشافت حاجة زي دي بالجمال ده. شكراً Hoor
+          على الشغل الجميل 🌸</p>
+        <div class="testimonial-author">
+          <div class="avatar av-3">👩‍🦰</div>
+          <div>
+            <div class="author-name">مريم خالد</div>
+            <div class="author-loc">📍 المنصورة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-f">Hoor <span>✦</span> Resin</span>
+        <p>متجر رزن يدوي متخصص في قطع فريدة مصنوعة بحب واهتمام. نصنع حلمك بأيدينا 💕</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/hoor_resin_" target="_blank" class="social-link">📸</a>
+          <a href="https://www.tiktok.com/@hoor40726676" target="_blank" class="social-link">🎵</a>
+          <a href="https://www.facebook.com/Caesarewear" target="_blank" class="social-link">👤</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المتجر</h4>
+        <ul>
+          <li><a href="#featured">جميع المنتجات</a></li>
+          <li><a href="#">مجوهرات</a></li>
+          <li><a href="#">ديكور</a></li>
+          <li><a href="#">هدايا</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>خدماتنا</h4>
+        <ul>
+          <li><a href="#custom">طلبات خاصة</a></li>
+          <li><a href="#">هدايا بالجملة</a></li>
+          <li><a href="#">تعليم الرزن</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل معنا</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/hoor_resin_" target="_blank">إنستاجرام</a></li>
+          <li><a href="https://www.tiktok.com/@hoor40726676" target="_blank">تيك توك</a></li>
+          <li><a href="https://www.facebook.com/Caesarewear" target="_blank">فيسبوك</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Hoor Resin Art — جميع الحقوق محفوظة</span>
+      <span>صنع بحب ❤️</span>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      rx += (mx - rx) * 0.2; ry += (my - ry) * 0.2;
+      cursor.style.transform = `translate(${mx - 2}px, ${my - 2}px)`;
+      ring.style.transform = `translate(${rx - 28}px, ${ry - 28}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = '50px'; ring.style.height = '50px'; ring.style.borderColor = 'var(--gold)'; });
+      el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.borderColor = 'var(--rose)'; });
+    });
+
+    // Cart
+    let cartCount = 0;
+    const cartEl = document.getElementById('cart-count');
+    function addToCart(btn) {
+      cartCount++;
+      cartEl.textContent = cartCount;
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+      // Wishlist toggle
+      const wish = btn.closest('.product-card').querySelector('.product-wishlist');
+      if (wish) wish.textContent = '❤️';
+    }
+
+    // Wishlist toggle
+    document.querySelectorAll('.product-wishlist').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+      });
+    });
+
+    // Scroll fade-up animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Immediate first fade
+    setTimeout(() => {
+      document.querySelectorAll('.fade-up').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) el.classList.add('visible');
+      });
+    }, 100);
+  </script>
+</body>
+
+</html>

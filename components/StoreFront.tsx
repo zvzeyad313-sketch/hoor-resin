@@ -19,9 +19,22 @@ type Product = {
 export default function StoreFront({ initialProducts }: { initialProducts: Product[] }) {
   const [cart, setCart] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [checkoutStep, setCheckoutStep] = useState<'cart' | 'info'>('cart');
+  const [customerInfo, setCustomerInfo] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    notes: ''
+  });
   const [toastVisible, setToastVisible] = useState(false);
   const [isOrdering, setIsOrdering] = useState(false);
   const isOrderingRef = useRef(false);
+  
+  // New States
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('الكل');
+
   const [customOrder, setCustomOrder] = useState({
     colorShape: '',
     nameMessage: '',
@@ -34,7 +47,9 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
   const { cursorRef, ringRef, handleLinkHover, setCursorVisibility } = useCustomCursor();
 
   const removeFromCart = (indexToRemove: number) => {
-    setCart(cart.filter((_, idx) => idx !== indexToRemove));
+    const newCart = cart.filter((_, idx) => idx !== indexToRemove);
+    setCart(newCart);
+    if (newCart.length === 0) setCheckoutStep('cart');
   };
 
   useEffect(() => {
@@ -63,8 +78,11 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
 
   // Handle cursor visibility when modal opens/closes
   useEffect(() => {
-    setCursorVisibility(!isCartOpen);
-  }, [isCartOpen]);
+    setCursorVisibility(!isCartOpen && !selectedProduct);
+    if (!isCartOpen) {
+      setTimeout(() => setCheckoutStep('cart'), 400); // Reset after animation
+    }
+  }, [isCartOpen, selectedProduct]);
 
   const addToCart = (product: Product) => {
     setCart([...cart, product]);
@@ -72,31 +90,54 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
     setTimeout(() => setToastVisible(false), 2500);
   };
 
-  const handleCheckout = async (e: React.MouseEvent) => {
+  const filteredProducts = initialProducts.filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         p.description?.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === 'الكل' || p.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const categories = ['الكل', ...Array.from(new Set(initialProducts.map(p => p.category).filter(Boolean)))];
+
+  const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isOrderingRef.current) return;
     if (cart.length === 0) {
       alert('السلة فارغة!');
       return;
     }
+
+    if (!customerInfo.name || !customerInfo.phone || !customerInfo.address) {
+      alert('يرجى إكمال بيانات الشحن أولاً!');
+      return;
+    }
     
     isOrderingRef.current = true;
     setIsOrdering(true);
     try {
+      const total = cart.reduce((acc, p) => acc + p.price, 0);
+      
       // 1. Log to database via Next.js API
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart, total: cart.reduce((acc, p) => acc + p.price, 0) })
+        body: JSON.stringify({ 
+          items: cart, 
+          total,
+          customer_name: customerInfo.name,
+          customer_phone: customerInfo.phone,
+          customer_address: customerInfo.address,
+          notes: customerInfo.notes
+        })
       });
       
       if (!res.ok) throw new Error('Failed to log order');
       
       // 2. Redirect to WhatsApp
       const itemsText = cart.map(item => `- ${item.name} (${item.price} ج.م)`).join('%0A');
-      const total = cart.reduce((acc, p) => acc + p.price, 0);
-      const message = `مرحباً، أود طلب هذه المنتجات:%0A${itemsText}%0A%0Aالإجمالي: ${total} ج.م`;
-      const waNumber = '201128025204'; // Actual WhatsApp number
+      const infoText = `الاسم: ${customerInfo.name}%0Aالهاتف: ${customerInfo.phone}%0Aالعنوان: ${customerInfo.address}${customerInfo.notes ? `%0Aملاحظات: ${customerInfo.notes}` : ''}`;
+      const message = `مرحباً هوور، أود طلب هذه المنتجات:%0A${itemsText}%0A%0Aإجمالي المبلغ: ${total} ج.م%0A%0Aبيانات الشحن:%0A${infoText}`;
+      const waNumber = '201128025204'; 
       window.location.href = `https://wa.me/${waNumber}?text=${message}`;
       
     } catch (err) {
@@ -123,8 +164,8 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
         <div className="artisan-modal">
           <div className="artisan-modal-header">
             <button className="btn-close" onClick={() => setIsCartOpen(false)} onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>✕</button>
-            <h1 className="display-lg">سلة المشتريات</h1>
-            <span className="label-sm">الخطوة الأخيرة</span>
+            <h1 className="display-lg">{checkoutStep === 'cart' ? 'سلة المشتريات' : 'إتمام الطلب'}</h1>
+            <span className="label-sm">{checkoutStep === 'cart' ? 'الخطوة الأولى' : 'بيانات الشحن'}</span>
           </div>
           
           <div className="artisan-modal-body">
@@ -133,7 +174,7 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
                 <div className="display-lg" style={{ opacity: 0.2, marginBottom: '1rem' }}>فارغة</div>
                 <p className="body-lg">سلتك الخالية بانتظار لمستك الفنية ✦</p>
               </div>
-            ) : (
+            ) : checkoutStep === 'cart' ? (
               cart.map((item, index) => (
                 <div key={`${item.id}-${index}`} className="artisan-cart-item">
                   <img 
@@ -168,6 +209,52 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
                   </div>
                 </div>
               ))
+            ) : (
+              <form id="checkoutForm" onSubmit={handleCheckout} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div className="input-group">
+                  <label className="label-sm" style={{ marginBottom: '0.5rem', display: 'block' }}>الاسم بالكامل</label>
+                  <input 
+                    type="text" 
+                    placeholder="اكتب اسمك هنا..." 
+                    className="artisan-input"
+                    value={customerInfo.name}
+                    onChange={(e) => setCustomerInfo(prev => ({ ...prev, name: e.target.value }))}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="label-sm" style={{ marginBottom: '0.5rem', display: 'block' }}>رقم الهاتف</label>
+                  <input 
+                    type="tel" 
+                    placeholder="01xxxxxxxxx" 
+                    className="artisan-input"
+                    value={customerInfo.phone}
+                    onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="label-sm" style={{ marginBottom: '0.5rem', display: 'block' }}>عنوان التوصيل</label>
+                  <textarea 
+                    placeholder="المحافظة، المنطقة، اسم الشارع..." 
+                    className="artisan-input"
+                    value={customerInfo.address}
+                    onChange={(e) => setCustomerInfo(prev => ({ ...prev, address: e.target.value }))}
+                    rows={3}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="label-sm" style={{ marginBottom: '0.5rem', display: 'block' }}>ملاحظات إضافية (اختياري)</label>
+                  <textarea 
+                    placeholder="أي تفاصيل أخرى تود إضافتها للطلب..." 
+                    className="artisan-input"
+                    value={customerInfo.notes}
+                    onChange={(e) => setCustomerInfo(prev => ({ ...prev, notes: e.target.value }))}
+                    rows={2}
+                  />
+                </div>
+              </form>
             )}
           </div>
           
@@ -176,20 +263,110 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
               <span className="body-lg">الإجمالي تقديرياً</span>
               <span className="display-lg" style={{ fontSize: '2rem' }}>{cart.reduce((acc, p) => acc + p.price, 0)} ج.م</span>
             </div>
+            {checkoutStep === 'cart' ? (
+              <button 
+                className="btn-primary-artisan" 
+                onClick={() => {
+                  if (cart.length > 0) setCheckoutStep('info');
+                }}
+                onMouseEnter={() => handleLinkHover(true)} 
+                onMouseLeave={() => handleLinkHover(false)}
+                disabled={cart.length === 0}
+                style={{ opacity: cart.length === 0 ? 0.6 : 1 }}
+              >
+                <span>الاستمرار لبيانات الشحن</span>
+                <span>←</span>
+              </button>
+            ) : (
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button 
+                  className="btn-tertiary-artisan" 
+                  onClick={() => setCheckoutStep('cart')}
+                  onMouseEnter={() => handleLinkHover(true)} 
+                  onMouseLeave={() => handleLinkHover(false)}
+                  style={{ padding: '1rem' }}
+                >
+                  رجوع للسلة
+                </button>
+                <button 
+                  type="submit"
+                  form="checkoutForm"
+                  className="btn-primary-artisan" 
+                  onMouseEnter={() => handleLinkHover(true)} 
+                  onMouseLeave={() => handleLinkHover(false)}
+                  disabled={isOrdering}
+                  style={{ flex: 2 }}
+                >
+                  <span style={{ fontFamily: 'Tajawal, sans-serif' }}>{isOrdering ? 'جاري التحويل...' : 'تأكيد الطلب عبر واتساب'}</span>
+                  <span>✦</span>
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* PRODUCT DETAILS MODAL */}
+      <div className={`artisan-modal-overlay ${selectedProduct ? 'open' : ''}`} onClick={(e) => {
+        if (e.target === e.currentTarget) setSelectedProduct(null);
+      }}>
+        <div className="artisan-modal product-details-modal">
+          <div className="artisan-modal-header">
+            <button className="btn-close" onClick={() => setSelectedProduct(null)} onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>✕</button>
+            <h1 className="display-lg">تفاصيل المنتج</h1>
+            <span className="label-sm">{selectedProduct?.category || 'منتج'}</span>
+          </div>
+          
+          <div className="artisan-modal-body">
+            {selectedProduct && (
+              <div className="product-details-content">
+                <div className="product-details-img">
+                  <img 
+                    src={selectedProduct.image_url || '/placeholder.svg'} 
+                    alt={selectedProduct.name} 
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/placeholder.svg';
+                    }}
+                  />
+                </div>
+                <div className="product-details-info">
+                  <h2 className="display-lg" style={{ marginBottom: '1rem' }}>{selectedProduct.name}</h2>
+                  <div className="product-price" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+                    <span className="currency">ج.م </span>{selectedProduct.price}
+                  </div>
+                  <p className="body-lg" style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
+                    {selectedProduct.description || 'لا يوجد وصف متاح لهذا المنتج حالياً.'}
+                  </p>
+                  
+                  <div className="product-details-features">
+                    <div className="feature-item">
+                      <span>✦</span> صنع يدوياً بكل حب
+                    </div>
+                    <div className="feature-item">
+                      <span>✦</span> خامات عالية الجودة
+                    </div>
+                    <div className="feature-item">
+                      <span>✦</span> قطعة فريدة من نوعها
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <div className="artisan-modal-footer">
             <button 
               className="btn-primary-artisan" 
-              onClick={(e) => {
-                if (cart.length > 0 && !isOrdering) {
-                  setIsCartOpen(false);
-                  handleCheckout(e);
+              onClick={() => {
+                if (selectedProduct) {
+                  addToCart(selectedProduct);
+                  setSelectedProduct(null);
                 }
               }}
               onMouseEnter={() => handleLinkHover(true)} 
               onMouseLeave={() => handleLinkHover(false)}
-              disabled={cart.length === 0 || isOrdering}
-              style={{ opacity: (cart.length === 0 || isOrdering) ? 0.6 : 1 }}
             >
-              <span style={{ fontFamily: 'Tajawal, sans-serif' }}>{isOrdering ? 'جاري التحويل...' : 'إتمام الطلب عبر واتساب'}</span>
+              <span>إضافة للسلة</span>
               <span>✦</span>
             </button>
           </div>
@@ -223,18 +400,57 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
           <h2 className="section-title">منتجاتنا <em>المميزة</em></h2>
         </div>
 
+        {/* Search & Filter Bar */}
+        <div className="filter-bar fade-up">
+          <div className="search-wrapper">
+            <input 
+              type="text" 
+              placeholder="ابحث عن قطعة فنية..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onMouseEnter={() => handleLinkHover(true)} 
+              onMouseLeave={() => handleLinkHover(false)}
+            />
+            <span className="search-icon">🔍</span>
+          </div>
+          <div className="category-filters">
+            {categories.map(cat => (
+              <button 
+                key={cat}
+                className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat)}
+                onMouseEnter={() => handleLinkHover(true)} 
+                onMouseLeave={() => handleLinkHover(false)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="products-grid">
-          {initialProducts.length > 0 ? (
-            initialProducts.map((p, i) => (
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((p, i) => (
               <ProductCard 
                 key={p.id} 
                 product={p} 
                 addToCart={addToCart} 
                 handleLinkHover={handleLinkHover} 
+                onShowDetails={setSelectedProduct}
               />
             ))
           ) : (
-             <div style={{ textAlign: 'center', width: '100%', gridColumn: '1/-1', color: 'var(--text-light)' }}>لا توجد منتجات حالياً. سيتم إضافتها قريباً! ✨</div>
+             <div style={{ textAlign: 'center', width: '100%', gridColumn: '1/-1', color: 'var(--text-light)', padding: '4rem 0' }}>
+               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✨</div>
+               <p className="body-lg">لم نجد أي قطع تطابق بحثك حالياً.</p>
+               <button 
+                 className="btn-tertiary-artisan" 
+                 onClick={() => { setSearchQuery(''); setSelectedCategory('الكل'); }}
+                 style={{ marginTop: '1rem' }}
+               >
+                 عرض كل المنتجات
+               </button>
+             </div>
           )}
         </div>
       </section>

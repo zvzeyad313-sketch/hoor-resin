@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { items, total } = body;
+    const { items, total, customer_name, customer_phone, customer_address, notes } = body;
     
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
       // If no Supabase URL is set yet, just mock success so the WhatsApp redirect still works
@@ -16,11 +16,13 @@ export async function POST(req: Request) {
       .from('orders')
       .insert([
         { 
-          // We assume 'items' is a column that can store text or jsonb
           items: JSON.stringify(items), 
           total, 
+          customer_name,
+          customer_phone,
+          customer_address,
+          notes,
           status: 'pending'
-          // created_at usually auto-generates
         }
       ]);
       

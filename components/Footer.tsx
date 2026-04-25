@@ -41,7 +41,6 @@ export default function Footer() {
       </div>
       <div className="footer-bottom">
         <span>© 2026 HOOR Studio — جميع الحقوق محفوظة</span>
-        <span>تم التطوير بكل حب ❤️ بواسطة Ali Versel</span>
       </div>
     </footer>
   );

@@ -5,7 +5,6 @@ export const metadata: Metadata = {
   title: 'Hoor.vercel.app | Premium Resin Art Store',
   description: 'Elevate your space with HOOR Studio. Discover premium handmade resin art, unique jewelry, and bespoke home decor crafted with precision and passion. Shop the collection now.',
   keywords: ['resin art', 'handmade gifts', 'premium resin jewelry', 'home decor', 'custom resin pieces', 'HOOR studio'],
-  authors: [{ name: 'Ali Versel' }],
   openGraph: {
     title: 'Hoor.vercel.app | Premium Resin Art Store',
     description: 'Bespoke resin art and handmade treasures. Unique pieces designed to tell your story.',

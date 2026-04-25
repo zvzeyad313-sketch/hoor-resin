@@ -9,6 +9,10 @@
     --text: #1e293b;
     --white: #ffffff;
     
+    /* Premium Font Stacks */
+    --font-heading: 'Amiri', 'Cormorant Garamond', serif;
+    --font-body: 'IBM Plex Sans Arabic', sans-serif;
+
     /* Modern Ocean Design System */
     --sys-primary: #0f172a;
     --sys-primary-container: #1e293b;
@@ -36,11 +40,20 @@
 }
 
 body {
-    font-family: 'Tajawal', sans-serif;
+    font-family: var(--font-body);
     background: var(--cream);
     color: var(--text);
     overflow-x: hidden;
     scroll-behavior: smooth;
+    line-height: 1.6;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--dark);
 }
 
 /* ===== CURSOR ===== */
@@ -91,9 +104,9 @@ nav {
 }
 
 .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 900;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--deep);
     letter-spacing: 1px;
     text-decoration: none;
@@ -110,7 +123,8 @@ nav {
 }
 
 .nav-links a {
-    font-size: 0.9rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
     font-weight: 500;
     color: var(--text);
     text-decoration: none;
@@ -249,9 +263,9 @@ nav {
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 5vw, 5rem);
-    font-weight: 900;
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    font-weight: 700;
     line-height: 1.1;
     color: var(--dark);
     margin-bottom: 20px;
@@ -259,17 +273,19 @@ nav {
 
 .hero-title em {
     font-style: italic;
+    font-weight: 400;
     color: var(--rose);
 }
 
 .hero-sub {
-    font-size: 1.1rem;
+    font-family: var(--font-body);
+    font-size: 1.15rem;
     line-height: 1.8;
     color: var(--text);
     opacity: 0.8;
     max-width: 440px;
     margin-bottom: 40px;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .hero-btns {
@@ -500,15 +516,16 @@ nav {
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
     color: var(--dark);
     line-height: 1.2;
 }
 
 .section-title em {
     font-style: italic;
+    font-weight: 400;
     color: var(--rose);
 }
 
@@ -641,7 +658,8 @@ nav {
 }
 
 .product-cat {
-    font-size: 0.7rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--gold);
     letter-spacing: 1.5px;
@@ -650,8 +668,8 @@ nav {
 }
 
 .product-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--dark);
     margin-bottom: 8px;
@@ -1244,26 +1262,28 @@ footer {
 
 /* Artisan Typography Utilities */
 .display-lg {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 900;
-    color: var(--sys-on-surface);
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--dark);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
 }
 
 .body-lg {
-    font-size: 1rem;
-    color: var(--sys-on-surface);
-    line-height: 1.6;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text);
+    line-height: 1.7;
     font-weight: 400;
 }
 
 .label-sm {
-    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
     color: var(--sys-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     font-weight: 700;
 }
 

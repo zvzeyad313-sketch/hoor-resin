@@ -8,9 +8,9 @@ export default function Footer() {
           <span className="logo-f">Hoor <span>✦</span> Resin</span>
           <p>متجر رزن يدوي متخصص في قطع فريدة مصنوعة بحب واهتمام. نصنع حلمك بأيدينا 💕</p>
           <div className="social-links">
-            <a href="https://www.instagram.com/hoor_resin_" target="_blank" rel="noreferrer" className="social-link">📸</a>
-            <a href="https://www.tiktok.com/@hoor40726676" target="_blank" rel="noreferrer" className="social-link">🎵</a>
-            <a href="https://www.facebook.com/Caesarewear" target="_blank" rel="noreferrer" className="social-link">👤</a>
+            <a href="https://www.instagram.com/hoor_resin_" target="_blank" rel="noreferrer" className="social-link" aria-label="Instagram">📸</a>
+            <a href="https://www.tiktok.com/@hoor40726676" target="_blank" rel="noreferrer" className="social-link" aria-label="TikTok">🎵</a>
+            <a href="https://www.facebook.com/Caesarewear" target="_blank" rel="noreferrer" className="social-link" aria-label="Facebook">👤</a>
           </div>
         </div>
         <div className="footer-col">

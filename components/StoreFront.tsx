@@ -375,261 +375,269 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
       
       <Hero handleLinkHover={handleLinkHover} />
 
-      {/* MARQUEE */}
-      <div className="marquee-section">
-        <div className="marquee-track">
-          <span>رزن يدوي</span><span className="dot">✦</span>
-          <span>مجوهرات فريدة</span><span className="dot">✦</span>
-          <span>إكسسوارات مخصصة</span><span className="dot">✦</span>
-          <span>هدايا مميزة</span><span className="dot">✦</span>
-          <span>صنع بحب</span><span className="dot">✦</span>
-          <span>Hoor Resin Art</span><span className="dot">✦</span>
-          <span>رزن يدوي</span><span className="dot">✦</span>
-          <span>مجوهرات فريدة</span><span className="dot">✦</span>
-          <span>إكسسوارات مخصصة</span><span className="dot">✦</span>
-          <span>هدايا مميزة</span><span className="dot">✦</span>
-          <span>صنع بحب</span><span className="dot">✦</span>
-          <span>Hoor Resin Art</span><span className="dot">✦</span>
-        </div>
-      </div>
-
-      {/* FEATURED PRODUCTS */}
-      <section className="featured" id="featured">
-        <div className="section-header fade-up">
-          <div className="section-label">✦ أحدث القطع</div>
-          <h2 className="section-title">منتجاتنا <em>المميزة</em></h2>
-        </div>
-
-        {/* Search & Filter Bar */}
-        <div className="filter-bar fade-up">
-          <div className="search-wrapper">
-            <input 
-              type="text" 
-              placeholder="ابحث عن قطعة فنية..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onMouseEnter={() => handleLinkHover(true)} 
-              onMouseLeave={() => handleLinkHover(false)}
-            />
-            <span className="search-icon">🔍</span>
+      <main>
+        {/* MARQUEE */}
+        <div className="marquee-section" aria-hidden="true">
+          <div className="marquee-track">
+            <span>رزن يدوي</span><span className="dot">✦</span>
+            <span>مجوهرات فريدة</span><span className="dot">✦</span>
+            <span>إكسسوارات مخصصة</span><span className="dot">✦</span>
+            <span>هدايا مميزة</span><span className="dot">✦</span>
+            <span>صنع بحب</span><span className="dot">✦</span>
+            <span>Hoor Resin Art</span><span className="dot">✦</span>
+            <span>رزن يدوي</span><span className="dot">✦</span>
+            <span>مجوهرات فريدة</span><span className="dot">✦</span>
+            <span>إكسسوارات مخصصة</span><span className="dot">✦</span>
+            <span>هدايا مميزة</span><span className="dot">✦</span>
+            <span>صنع بحب</span><span className="dot">✦</span>
+            <span>Hoor Resin Art</span><span className="dot">✦</span>
           </div>
-          <div className="category-filters">
-            {categories.map(cat => (
-              <button 
-                key={cat}
-                className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat)}
+        </div>
+
+        {/* FEATURED PRODUCTS */}
+        <section className="featured" id="featured">
+          <div className="section-header fade-up">
+            <span className="section-label">✦ أحدث القطع</span>
+            <h2 className="section-title">منتجاتنا <em>المميزة</em></h2>
+          </div>
+
+          {/* Search & Filter Bar */}
+          <div className="filter-bar fade-up">
+            <div className="search-wrapper">
+              <input 
+                type="text" 
+                placeholder="ابحث عن قطعة فنية..." 
+                aria-label="ابحث عن منتج"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 onMouseEnter={() => handleLinkHover(true)} 
                 onMouseLeave={() => handleLinkHover(false)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="products-grid">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((p, i) => (
-              <ProductCard 
-                key={p.id} 
-                product={p} 
-                addToCart={addToCart} 
-                handleLinkHover={handleLinkHover} 
-                onShowDetails={setSelectedProduct}
               />
-            ))
-          ) : (
-             <div style={{ textAlign: 'center', width: '100%', gridColumn: '1/-1', color: 'var(--text-light)', padding: '4rem 0' }}>
-               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✨</div>
-               <p className="body-lg">لم نجد أي قطع تطابق بحثك حالياً.</p>
-               <button 
-                 className="btn-tertiary-artisan" 
-                 onClick={() => { setSearchQuery(''); setSelectedCategory('الكل'); }}
-                 style={{ marginTop: '1rem' }}
-               >
-                 عرض كل المنتجات
-               </button>
-             </div>
-          )}
-        </div>
-      </section>
-
-      {/* CUSTOM ORDER / STUDIO */}
-      <section className="studio-section fade-up" id="custom">
-        <div className="studio-container">
-          <div className="studio-content">
-            <div className="section-label">✦ استوديو التصميم اليدوي</div>
-            <h2 className="display-lg" style={{ marginBottom: '1.5rem' }}>صممي <em>قطعتك الفريدة</em> بنفسك</h2>
-            <p className="body-lg" style={{ marginBottom: '3rem', maxWidth: '500px', opacity: 0.8 }}>
-              سواء كنتِ تبحثين عن هدية لمناسبة خاصة أو تريدين قطعة فنية تعبر عن ذوقك، نحن هنا لنحول خيالك إلى واقع ملموس بدقة واحترافية.
-            </p>
-
-            <div className="studio-process">
-              <div className="process-step">
-                <div className="step-badge">01</div>
-                <div className="step-info">
-                  <h3>اختيار التصميم</h3>
-                  <p>حددي الألوان، الأشكال، والإضافات التي تفضلينها (ورد، ورق ذهب، صور).</p>
-                </div>
-              </div>
-              <div className="process-step">
-                <div className="step-badge">02</div>
-                <div className="step-info">
-                  <h3>التنفيذ اليدوي</h3>
-                  <p>نبدأ بصب الرزن يدوياً مع العناية بأدق التفاصيل لضمان أعلى جودة.</p>
-                </div>
-              </div>
-              <div className="process-step">
-                <div className="step-badge">03</div>
-                <div className="step-info">
-                  <h3>التغليف الفاخر</h3>
-                  <p>نغلف طلبك بعناية فائقة ليصلك كقطعة فنية تليق بكِ.</p>
-                </div>
-              </div>
+              <span className="search-icon" aria-hidden="true">🔍</span>
             </div>
-          </div>
-
-          <div className="studio-form-wrapper">
-            <div className="studio-card-glass">
-              <h3 className="body-lg" style={{ fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>تفاصيل طلبك الخاص</h3>
-              <div className="studio-grid">
-                <div className="input-group">
-                  <label className="label-sm">الألوان والشكل</label>
-                  <input 
-                    type="text" 
-                    placeholder="مثال: أمواج زرقاء، ورد مجفف..." 
-                    className="artisan-input"
-                    value={customOrder.colorShape}
-                    onChange={(e) => setCustomOrder(prev => ({ ...prev, colorShape: e.target.value }))}
-                  />
-                </div>
-                <div className="input-group">
-                  <label className="label-sm">الاسم أو العبارة</label>
-                  <input 
-                    type="text" 
-                    placeholder="الاسم المراد كتابته" 
-                    className="artisan-input"
-                    value={customOrder.nameMessage}
-                    onChange={(e) => setCustomOrder(prev => ({ ...prev, nameMessage: e.target.value }))}
-                  />
-                </div>
-                <div className="input-group">
-                  <label className="label-sm">نوع الجليتر / الإضافات</label>
-                  <input 
-                    type="text" 
-                    placeholder="ذهبي، فضي، نجوم..." 
-                    className="artisan-input"
-                    value={customOrder.glitterType}
-                    onChange={(e) => setCustomOrder(prev => ({ ...prev, glitterType: e.target.value }))}
-                  />
-                </div>
-                <div className="input-group">
-                  <label className="label-sm">الحجم المطلوب</label>
-                  <select 
-                    className="artisan-input"
-                    value={customOrder.size}
-                    onChange={(e) => setCustomOrder(prev => ({ ...prev, size: e.target.value }))}
-                  >
-                    <option value="small">صغير (S)</option>
-                    <option value="medium">متوسط (M)</option>
-                    <option value="large">كبير (L)</option>
-                  </select>
-                </div>
-                <div className="input-group full-width">
-                  <label className="label-sm">تفاصيل إضافية</label>
-                  <textarea 
-                    placeholder="صفي لنا ما بداخل مخيلتك لنجعله حقيقة..." 
-                    className="artisan-input"
-                    rows={3}
-                    value={customOrder.details}
-                    onChange={(e) => setCustomOrder(prev => ({ ...prev, details: e.target.value }))}
-                  />
-                </div>
+            <div className="category-filters" role="group" aria-label="تصفية حسب التصنيف">
+              {categories.map(cat => (
                 <button 
-                  className="btn-primary-artisan"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if(!customOrder.colorShape && !customOrder.nameMessage && !customOrder.details) {
-                      alert("يرجى إدخال بعض تفاصيل الطلب الخاص أولاً!");
-                      return;
-                    }
-                    const product: Product = {
-                      id: 'custom-' + Date.now(),
-                      name: 'طلب خاص: ' + (customOrder.colorShape || 'تصميم يدوي'),
-                      description: `اللون: ${customOrder.colorShape} | الاسم: ${customOrder.nameMessage} | الجليتر: ${customOrder.glitterType} | الحجم: ${customOrder.size} | التفاصيل: ${customOrder.details}`,
-                      price: 0,
-                      category: 'custom',
-                      image_url: '/placeholder.svg'
-                    };
-                    addToCart(product);
-                    setCheckoutStep('info');
-                    setIsCartOpen(true);
-                  }}
+                  key={cat}
+                  className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(cat)}
                   onMouseEnter={() => handleLinkHover(true)} 
                   onMouseLeave={() => handleLinkHover(false)}
                 >
-                  <span>متابعة الطلب الخاص</span>
-                  <span>✦</span>
+                  {cat}
                 </button>
-              </div>
-              <p style={{ textAlign: 'center', fontSize: '0.8rem', opacity: 0.6, marginTop: '1.5rem' }}>* سيتم تحديد التكلفة النهائية بعد مراجعة التفاصيل</p>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* WHY US */}
-      <section className="why fade-up" id="about">
-        <div className="section-header">
-          <div className="section-label">✦ ليه Hoor</div>
-          <h2 className="section-title">لأننا <em>نهتم</em> بكل تفصيلة</h2>
-        </div>
-        <div className="why-grid">
-          <div className="why-card">
-            <span className="why-icon">🤲</span>
-            <div className="why-title">صنع يدوي 100%</div>
-            <p className="why-desc">كل قطعة تتصنع بإيدينا بكل حب واهتمام، مفيش قطعتين زي بعض أبداً</p>
+          <div className="products-grid">
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((p, i) => (
+                <ProductCard 
+                  key={p.id} 
+                  product={p} 
+                  addToCart={addToCart} 
+                  handleLinkHover={handleLinkHover} 
+                  onShowDetails={setSelectedProduct}
+                />
+              ))
+            ) : (
+               <div style={{ textAlign: 'center', width: '100%', gridColumn: '1/-1', color: 'var(--text-light)', padding: '4rem 0' }}>
+                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }} aria-hidden="true">✨</div>
+                 <p className="body-lg">لم نجد أي قطع تطابق بحثك حالياً.</p>
+                 <button 
+                   className="btn-tertiary-artisan" 
+                   onClick={() => { setSearchQuery(''); setSelectedCategory('الكل'); }}
+                   style={{ marginTop: '1rem' }}
+                 >
+                   عرض كل المنتجات
+                 </button>
+               </div>
+            )}
           </div>
-          <div className="why-card">
-            <span className="why-icon">🌿</span>
-            <div className="why-title">خامات عالية الجودة</div>
-            <p className="why-desc">بنستخدم رزن وألوان عالمية آمنة وتدوم لسنين طويلة</p>
-          </div>
-          <div className="why-card">
-            <span className="why-icon">💝</span>
-            <div className="why-title">تغليف مميز</div>
-            <p className="why-desc">كل طلب بيتغلف بعناية في علبة هدية جميلة، مناسب للهدايا الخاصة</p>
-          </div>
-          <div className="why-card">
-            <span className="why-icon">🚚</span>
-            <div className="why-title">توصيل لكل مكان</div>
-            <p className="why-desc">بنوصّل لكل محافظات مصر، والشحن متاح لجميع الأماكن</p>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* TESTIMONIALS */}
-      <section className="testimonials fade-up">
-        <div className="section-header">
-          <div className="section-label">✦ آراء عملاؤنا</div>
-          <h2 className="section-title">بيقولوا عنا <em>إيه؟</em></h2>
-        </div>
-        <div className="testimonials-grid">
-          <div className="testimonial-card">
-            <div className="stars">⭐⭐⭐⭐⭐</div>
-            <p className="testimonial-text">ربنا يبارك في الأيادي اللي صنعت الخاتم ده! جميل جداً وفاق توقعاتي بمراحل 😍 الشحن كان سريع والتغليف تحفة</p>
-            <div className="testimonial-author">
-              <div className="avatar av-1">👩</div>
-              <div>
-                <div className="author-name">سارة محمد</div>
-                <div className="author-loc">📍 القاهرة</div>
+        {/* CUSTOM ORDER / STUDIO */}
+        <section className="studio-section fade-up" id="custom">
+          <div className="studio-container">
+            <div className="studio-content">
+              <span className="section-label">✦ استوديو التصميم اليدوي</span>
+              <h2 className="display-lg" style={{ marginBottom: '1.5rem' }}>صممي <em>قطعتك الفريدة</em> بنفسك</h2>
+              <p className="body-lg" style={{ marginBottom: '3rem', maxWidth: '500px', opacity: 0.8 }}>
+                سواء كنتِ تبحثين عن هدية لمناسبة خاصة أو تريدين قطعة فنية تعبر عن ذوقك، نحن هنا لنحول خيالك إلى واقع ملموس بدقة واحترافية.
+              </p>
+
+              <div className="studio-process">
+                <div className="process-step">
+                  <div className="step-badge" aria-hidden="true">01</div>
+                  <div className="step-info">
+                    <h3>اختيار التصميم</h3>
+                    <p>حددي الألوان، الأشكال، والإضافات التي تفضلينها (ورد، ورق ذهب، صور).</p>
+                  </div>
+                </div>
+                <div className="process-step">
+                  <div className="step-badge" aria-hidden="true">02</div>
+                  <div className="step-info">
+                    <h3>التنفيذ اليدوي</h3>
+                    <p>نبدأ بصب الرزن يدوياً مع العناية بأدق التفاصيل لضمان أعلى جودة.</p>
+                  </div>
+                </div>
+                <div className="process-step">
+                  <div className="step-badge" aria-hidden="true">03</div>
+                  <div className="step-info">
+                    <h3>التغليف الفاخر</h3>
+                    <p>نغلف طلبك بعناية فائقة ليصلك كقطعة فنية تليق بكِ.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="studio-form-wrapper">
+              <div className="studio-card-glass">
+                <h3 className="body-lg" style={{ fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>تفاصيل طلبك الخاص</h3>
+                <div className="studio-grid">
+                  <div className="input-group">
+                    <label className="label-sm" htmlFor="colorShape">الألوان والشكل</label>
+                    <input 
+                      id="colorShape"
+                      type="text" 
+                      placeholder="مثال: أمواج زرقاء، ورد مجفف..." 
+                      className="artisan-input"
+                      value={customOrder.colorShape}
+                      onChange={(e) => setCustomOrder(prev => ({ ...prev, colorShape: e.target.value }))}
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label className="label-sm" htmlFor="nameMessage">الاسم أو العبارة</label>
+                    <input 
+                      id="nameMessage"
+                      type="text" 
+                      placeholder="الاسم المراد كتابته" 
+                      className="artisan-input"
+                      value={customOrder.nameMessage}
+                      onChange={(e) => setCustomOrder(prev => ({ ...prev, nameMessage: e.target.value }))}
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label className="label-sm" htmlFor="glitterType">نوع الجليتر / الإضافات</label>
+                    <input 
+                      id="glitterType"
+                      type="text" 
+                      placeholder="ذهبي، فضي، نجوم..." 
+                      className="artisan-input"
+                      value={customOrder.glitterType}
+                      onChange={(e) => setCustomOrder(prev => ({ ...prev, glitterType: e.target.value }))}
+                    />
+                  </div>
+                  <div className="input-group">
+                    <label className="label-sm" htmlFor="size">الحجم المطلوب</label>
+                    <select 
+                      id="size"
+                      className="artisan-input"
+                      value={customOrder.size}
+                      onChange={(e) => setCustomOrder(prev => ({ ...prev, size: e.target.value }))}
+                    >
+                      <option value="small">صغير (S)</option>
+                      <option value="medium">متوسط (M)</option>
+                      <option value="large">كبير (L)</option>
+                    </select>
+                  </div>
+                  <div className="input-group full-width">
+                    <label className="label-sm" htmlFor="details">تفاصيل إضافية</label>
+                    <textarea 
+                      id="details"
+                      placeholder="صفي لنا ما بداخل مخيلتك لنجعله حقيقة..." 
+                      className="artisan-input"
+                      rows={3}
+                      value={customOrder.details}
+                      onChange={(e) => setCustomOrder(prev => ({ ...prev, details: e.target.value }))}
+                    />
+                  </div>
+                  <button 
+                    className="btn-primary-artisan"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if(!customOrder.colorShape && !customOrder.nameMessage && !customOrder.details) {
+                        alert("يرجى إدخال بعض تفاصيل الطلب الخاص أولاً!");
+                        return;
+                      }
+                      const product: Product = {
+                        id: 'custom-' + Date.now(),
+                        name: 'طلب خاص: ' + (customOrder.colorShape || 'تصميم يدوي'),
+                        description: `اللون: ${customOrder.colorShape} | الاسم: ${customOrder.nameMessage} | الجليتر: ${customOrder.glitterType} | الحجم: ${customOrder.size} | التفاصيل: ${customOrder.details}`,
+                        price: 0,
+                        category: 'custom',
+                        image_url: '/placeholder.svg'
+                      };
+                      addToCart(product);
+                      setCheckoutStep('info');
+                      setIsCartOpen(true);
+                    }}
+                    onMouseEnter={() => handleLinkHover(true)} 
+                    onMouseLeave={() => handleLinkHover(false)}
+                  >
+                    <span>متابعة الطلب الخاص</span>
+                    <span>✦</span>
+                  </button>
+                </div>
+                <p style={{ textAlign: 'center', fontSize: '0.8rem', opacity: 0.6, marginTop: '1.5rem' }}>* سيتم تحديد التكلفة النهائية بعد مراجعة التفاصيل</p>
               </div>
             </div>
           </div>
-          {/* Add more testimonials here or map them if needed */}
-        </div>
-      </section>
+        </section>
+
+        {/* WHY US */}
+        <section className="why fade-up" id="about">
+          <div className="section-header">
+            <span className="section-label">✦ ليه Hoor</span>
+            <h2 className="section-title">لأننا <em>نهتم</em> بكل تفصيلة</h2>
+          </div>
+          <div className="why-grid">
+            <div className="why-card">
+              <span className="why-icon" aria-hidden="true">🤲</span>
+              <h3 className="why-title">صنع يدوي 100%</h3>
+              <p className="why-desc">كل قطعة تتصنع بإيدينا بكل حب واهتمام، مفيش قطعتين زي بعض أبداً</p>
+            </div>
+            <div className="why-card">
+              <span className="why-icon" aria-hidden="true">🌿</span>
+              <h3 className="why-title">خامات عالية الجودة</h3>
+              <p className="why-desc">بنستخدم رزن وألوان عالمية آمنة وتدوم لسنين طويلة</p>
+            </div>
+            <div className="why-card">
+              <span className="why-icon" aria-hidden="true">💝</span>
+              <h3 className="why-title">تغليف مميز</h3>
+              <p className="why-desc">كل طلب بيتغلف بعناية في علبة هدية جميلة، مناسب للهدايا الخاصة</p>
+            </div>
+            <div className="why-card">
+              <span className="why-icon" aria-hidden="true">🚚</span>
+              <h3 className="why-title">توصيل لكل مكان</h3>
+              <p className="why-desc">بنوصّل لكل محافظات مصر، والشحن متاح لجميع الأماكن</p>
+            </div>
+          </div>
+        </section>
+
+        {/* TESTIMONIALS */}
+        <section className="testimonials fade-up">
+          <div className="section-header">
+            <span className="section-label">✦ آراء عملاؤنا</span>
+            <h2 className="section-title">بيقولوا عنا <em>إيه؟</em></h2>
+          </div>
+          <div className="testimonials-grid">
+            <div className="testimonial-card">
+              <div className="stars" aria-label="5 stars">⭐⭐⭐⭐⭐</div>
+              <p className="testimonial-text">ربنا يبارك في الأيادي اللي صنعت الخاتم ده! جميل جداً وفاق توقعاتي بمراحل 😍 الشحن كان سريع والتغليف تحفة</p>
+              <div className="testimonial-author">
+                <div className="avatar av-1" aria-hidden="true">👩</div>
+                <div>
+                  <div className="author-name">سارة محمد</div>
+                  <div className="author-loc">📍 القاهرة</div>
+                </div>
+              </div>
+            </div>
+            {/* Add more testimonials here or map them if needed */}
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </>

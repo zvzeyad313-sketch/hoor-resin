@@ -2,30 +2,30 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Hoor.vercel.app | HOOR - متجر الرزن اليدوي',
-  description: 'اكتشف عالم الرزن مع HOOR. نقدم قطع فنية يدوية فريدة، هدايا مخصصة، وإكسسوارات منزلية مصنوعة بكل حب وإتقان في مصر.',
-  keywords: ['رزن', 'resin art', 'هدايا يدوية', 'ديكور منزلي', 'فن الرزن', 'إكسسوارات رزن', 'handmade gifts egypt', 'resin accessories'],
+  title: 'Hoor.vercel.app | Premium Resin Art Store',
+  description: 'Elevate your space with HOOR Studio. Discover premium handmade resin art, unique jewelry, and bespoke home decor crafted with precision and passion. Shop the collection now.',
+  keywords: ['resin art', 'handmade gifts', 'premium resin jewelry', 'home decor', 'custom resin pieces', 'HOOR studio'],
   authors: [{ name: 'Ali Versel' }],
   openGraph: {
-    title: 'HOOR | متجر الرزن اليدوي',
-    description: 'قطع فنية يدوية فريدة مصنوعة بحب. تسوق الآن أحدث أعمال الرزن اليدوية من HOOR.',
+    title: 'Hoor.vercel.app | Premium Resin Art Store',
+    description: 'Bespoke resin art and handmade treasures. Unique pieces designed to tell your story.',
     url: 'https://hoor-resin.vercel.app',
-    siteName: 'HOOR',
+    siteName: 'HOOR Studio',
     images: [
       {
         url: 'https://hoor-resin.vercel.app/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'HOOR - Handmade Beauty',
+        alt: 'HOOR Studio - Premium Resin Art',
       },
     ],
-    locale: 'ar_EG',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HOOR | متجر الرزن اليدوي',
-    description: 'قطع فنية يدوية فريدة مصنوعة بحب في مصر من HOOR.',
+    title: 'HOOR | Premium Resin Art',
+    description: 'Unique handmade resin art and jewelry.',
     images: ['https://hoor-resin.vercel.app/og-image.jpg'],
   },
   viewport: 'width=device-width, initial-scale=1',

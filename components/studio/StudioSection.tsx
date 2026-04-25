@@ -43,7 +43,7 @@ export default function StudioSection({
       <div className="studio-container">
         <div className="studio-content">
           <span className="section-label">✦ استوديو التصميم اليدوي</span>
-          <h2 className="display-lg" style={{ marginBottom: '1.5rem' }}>صممي <em>قطعتك الفريدة</em> بنفسك</h2>
+          <h2 className="section-title">صممي <em>قطعتك الفريدة</em> بنفسك</h2>
           <p className="body-lg" style={{ marginBottom: '3rem', maxWidth: '500px', opacity: 0.8 }}>
             سواء كنتِ تبحثين عن هدية لمناسبة خاصة أو تريدين قطعة فنية تعبر عن ذوقك، نحن هنا لنحول خيالك إلى واقع ملموس بدقة واحترافية.
           </p>

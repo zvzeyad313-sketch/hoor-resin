@@ -28,56 +28,89 @@ export default function ProductDetailsModal({
             onClick={onClose} 
             onMouseEnter={() => handleLinkHover(true)} 
             onMouseLeave={() => handleLinkHover(false)}
+            aria-label="Close"
           >✕</button>
-          <h1 className="display-lg">تفاصيل المنتج</h1>
-          <span className="label-sm">{product.category || 'منتج'}</span>
+          <div className="badge-limited">🔥 Limited Edition - Unique Piece</div>
         </div>
         
         <div className="artisan-modal-body">
-          <div className="product-details-content">
-            <div className="product-details-img">
-              <img 
-                src={product.image_url || '/placeholder.svg'} 
-                alt={product.name} 
-              />
-            </div>
-            <div className="product-details-info">
-              <h2 className="display-lg" style={{ marginBottom: '1rem' }}>{product.name}</h2>
-              <div className="product-price" style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
-                <span className="currency">ج.م </span>{product.price}
+          <div className="product-details-container">
+            {/* LEFT: IMAGE GALLERY */}
+            <div className="product-gallery">
+              <div className="gallery-main">
+                <img 
+                  src={product.image_url || '/placeholder.svg'} 
+                  alt={product.name} 
+                />
               </div>
-              <p className="body-lg" style={{ marginBottom: '2rem', lineHeight: '1.8' }}>
-                {product.description || 'لا يوجد وصف متاح لهذا المنتج حالياً.'}
-              </p>
+              <div className="gallery-thumbs">
+                <img src={product.image_url || '/placeholder.svg'} alt="Thumb 1" className="active" />
+                {/* Placeholders for additional views if available */}
+                <div className="thumb-placeholder">✨</div>
+                <div className="thumb-placeholder">🎨</div>
+              </div>
+            </div>
+
+            {/* RIGHT: INFO & ACTIONS */}
+            <div className="product-main-info">
+              <h1 className="display-lg" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{product.name}</h1>
+              <div className="label-sm" style={{ color: 'var(--gold)', marginBottom: '1.5rem' }}>{product.category || 'Premium Resin Art'}</div>
               
-              <div className="product-details-features">
-                <div className="feature-item">
-                  <span>✦</span> صنع يدوياً بكل حب
+              <div className="product-price-large">
+                <span className="amount">{product.price}</span>
+                <span className="currency"> ج.م</span>
+              </div>
+
+              <div className="product-sections">
+                <div className="info-section">
+                  <h3>قصة المنتج (Product Story)</h3>
+                  <p>{product.description || 'قطعة فنية فريدة صممت خصيصاً لتجمع بين جمال الطبيعة ورقّي فن الرزن.'}</p>
                 </div>
-                <div className="feature-item">
-                  <span>✦</span> خامات عالية الجودة
+
+                <div className="info-section">
+                  <h3>المميزات (Features)</h3>
+                  <ul>
+                    <li>✦ صنع يدوي 100% (Handmade)</li>
+                    <li>✦ تصميم فريد لا يتكرر (Unique Design)</li>
+                    <li>✦ رزن عالي الجودة ومقاوم للاصفرار</li>
+                  </ul>
                 </div>
-                <div className="feature-item">
-                  <span>✦</span> قطعة فريدة من نوعها
+
+                <div className="info-section">
+                  <h3>الاستخدام (Usage)</h3>
+                  <p>مثالية للديكور المنزلي الفاخر، أو كهدية استثنائية لمن تحب.</p>
+                </div>
+              </div>
+
+              <div className="product-actions-sticky">
+                <button 
+                  className="btn-primary-artisan" 
+                  onClick={() => {
+                    addToCart(product);
+                    onClose();
+                  }}
+                  onMouseEnter={() => handleLinkHover(true)} 
+                  onMouseLeave={() => handleLinkHover(false)}
+                >
+                  <span>أضف للسلة الآن</span>
+                  <span>✦</span>
+                </button>
+              </div>
+
+              {/* REVIEWS */}
+              <div className="product-reviews">
+                <h3>آراء العملاء</h3>
+                <div className="mini-review">
+                  <div className="stars">⭐⭐⭐⭐⭐</div>
+                  <p>"الجودة فاقت توقعاتي، التفاصيل مذهلة جداً!"</p>
+                </div>
+                <div className="mini-review">
+                  <div className="stars">⭐⭐⭐⭐⭐</div>
+                  <p>"تغليف رائع وقطعة فنية حقيقية."</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        <div className="artisan-modal-footer">
-          <button 
-            className="btn-primary-artisan" 
-            onClick={() => {
-              addToCart(product);
-              onClose();
-            }}
-            onMouseEnter={() => handleLinkHover(true)} 
-            onMouseLeave={() => handleLinkHover(false)}
-          >
-            <span>إضافة للسلة</span>
-            <span>✦</span>
-          </button>
         </div>
       </div>
     </div>

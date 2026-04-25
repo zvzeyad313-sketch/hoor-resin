@@ -19,12 +19,20 @@
     --sys-outline-variant: #e2e8f0;
     --sys-secondary: #0284c7;
     --sys-surface-variant: #e0f2fe;
+
+    /* Animations & Transitions */
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --transition-fast: 0.2s var(--ease-out-expo);
+    --transition-med: 0.4s var(--ease-out-expo);
+    --transition-slow: 0.6s var(--ease-out-expo);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -32,16 +40,17 @@ body {
     background: var(--cream);
     color: var(--text);
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 /* ===== CURSOR ===== */
 .hide-cursor-global, .hide-cursor-global * {
-    cursor: none;
+    cursor: none !important;
 }
 
 .cursor {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     background: var(--gold);
     border-radius: 50%;
     position: fixed;
@@ -49,21 +58,21 @@ body {
     left: 0;
     pointer-events: none;
     z-index: 9999;
-    transition: transform 0.15s ease;
-    mix-blend-mode: multiply;
+    transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), opacity 0.3s var(--ease-out-expo);
+    mix-blend-mode: difference;
 }
 
 .cursor-ring {
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid var(--rose);
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--rose);
     border-radius: 50%;
     position: fixed;
     top: 0;
     left: 0;
     pointer-events: none;
     z-index: 9998;
-    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+    transition: width 0.4s var(--ease-out-expo), height 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo), opacity 0.4s var(--ease-out-expo);
 }
 
 /* ===== NAVBAR ===== */
@@ -118,7 +127,7 @@ nav {
     width: 0;
     height: 1.5px;
     background: var(--gold);
-    transition: width 0.3s ease;
+    transition: width var(--transition-med);
 }
 
 .nav-links a:hover::after {
@@ -136,12 +145,17 @@ nav {
     font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
-    transition: background 0.3s ease;
+    transition: all var(--transition-fast);
 }
 
 .nav-cart:hover {
     background: var(--gold);
     color: var(--dark);
+    transform: translateY(-2px);
+}
+
+.nav-cart:active {
+    transform: translateY(0) scale(0.95);
 }
 
 /* ===== HERO ===== */
@@ -282,25 +296,29 @@ nav {
 .btn-primary:hover {
     background: var(--gold);
     color: var(--dark);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(201, 168, 110, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(245, 158, 11, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--deep);
+    color: var(--primary);
     padding: 16px 32px;
     border-radius: 50px;
-    border: 2px solid var(--deep);
+    border: 2px solid var(--sys-outline-variant);
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all var(--transition-med);
 }
 
 .btn-secondary:hover {
-    background: var(--deep);
-    color: var(--white);
+    border-color: var(--gold);
+    color: var(--gold);
     transform: translateY(-2px);
 }
 
@@ -311,6 +329,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    will-change: transform;
 }
 
 .hero-showcase {
@@ -507,13 +526,18 @@ nav {
     background: var(--white);
     border-radius: 24px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-med), box-shadow var(--transition-med);
     position: relative;
+    will-change: transform;
 }
 
 .product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 24px 60px rgba(42, 26, 23, 0.15);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
+}
+
+.product-card:active {
+    transform: translateY(-5px) scale(0.98);
 }
 
 .product-img {
@@ -523,6 +547,15 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform var(--transition-slow);
+}
+
+.product-card:hover .product-img img {
+    transform: scale(1.1);
+}
+
+.product-img img {
+    transition: transform var(--transition-slow);
 }
 
 .product-img .emoji {
@@ -1225,15 +1258,17 @@ footer {
     max-width: 600px;
     max-height: 90vh;
     border-radius: 1.5rem;
-    box-shadow: 0 40px 60px rgba(30, 27, 21, 0.05); /* Resin Shadow */
+    box-shadow: 0 40px 60px rgba(15, 23, 42, 0.08); /* Modern Shadow */
     overflow-y: auto;
     position: relative;
-    transform: translateY(20px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(30px) scale(0.95);
+    transition: transform var(--transition-med), opacity var(--transition-med);
+    opacity: 0;
 }
 
 .artisan-modal-overlay.open .artisan-modal {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    opacity: 1;
 }
 
 .artisan-modal-header {

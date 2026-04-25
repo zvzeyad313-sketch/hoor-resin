@@ -18,20 +18,34 @@ export function useCustomCursor() {
     let animationFrameId: number;
     const animateCursor = () => {
       const { mx, my, rx, ry } = posParams.current;
-      posParams.current.rx += (mx - rx) * 0.2;
-      posParams.current.ry += (my - ry) * 0.2;
+      posParams.current.rx += (mx - rx) * 0.15;
+      posParams.current.ry += (my - ry) * 0.15;
       
       if (cursorRef.current && ringRef.current) {
-        cursorRef.current.style.transform = `translate(${mx - 2}px, ${my - 2}px)`;
-        ringRef.current.style.transform = `translate(${posParams.current.rx - 28}px, ${posParams.current.ry - 28}px)`;
+        cursorRef.current.style.transform = `translate(${mx}px, ${my}px)`;
+        ringRef.current.style.transform = `translate(${posParams.current.rx - 20}px, ${posParams.current.ry - 20}px)`;
       }
       animationFrameId = requestAnimationFrame(animateCursor);
     };
     animateCursor();
 
+    const handleMouseDown = () => {
+      if (cursorRef.current) cursorRef.current.style.transform += ' scale(0.7)';
+      if (ringRef.current) ringRef.current.style.transform += ' scale(0.8)';
+    };
+    const handleMouseUp = () => {
+      if (cursorRef.current) cursorRef.current.style.transform = cursorRef.current.style.transform.replace(' scale(0.7)', '');
+      if (ringRef.current) ringRef.current.style.transform = ringRef.current.style.transform.replace(' scale(0.8)', '');
+    };
+
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
+
     return () => {
       document.body.classList.remove('hide-cursor-global');
       document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseUp);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

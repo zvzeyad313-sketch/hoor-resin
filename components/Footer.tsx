@@ -41,7 +41,7 @@ export default function Footer() {
       </div>
       <div className="footer-bottom">
         <span>© 2024 Hoor Resin Art — جميع الحقوق محفوظة</span>
-        <span>صنع بحب ❤️</span>
+        <span>صنع بحب ❤️ بواسطة Ali Versel</span>
       </div>
     </footer>
   );

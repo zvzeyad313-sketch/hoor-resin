@@ -40,8 +40,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2024 Hoor Resin Art — جميع الحقوق محفوظة</span>
-        <span>صنع بحب ❤️ بواسطة Ali Versel</span>
+        <span>© 2026 Hoor Resin Art — جميع الحقوق محفوظة</span>
+        <span>تم التطوير بكل حب ❤️ بواسطة Ali Versel</span>
       </div>
     </footer>
   );

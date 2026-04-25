@@ -1,24 +1,24 @@
 :root {
-    --cream: #faf6f0;
-    --blush: #e8c4b8;
-    --rose: #c9847a;
-    --deep: #7a3f38;
-    --gold: #c9a96e;
-    --gold-light: #e8d5a3;
-    --dark: #2a1a17;
-    --text: #4a2e2a;
+    --cream: #f8fafc;
+    --blush: #7dd3fc;
+    --rose: #0ea5e9;
+    --deep: #0f172a;
+    --gold: #f59e0b;
+    --gold-light: #fbbf24;
+    --dark: #020617;
+    --text: #1e293b;
     --white: #ffffff;
     
-    /* Artisanal Gallery Design System */
-    --sys-primary: #462427;
-    --sys-primary-container: #603a3c;
-    --sys-surface: #fff8ef;
-    --sys-surface-container-low: #faf3e8;
+    /* Modern Ocean Design System */
+    --sys-primary: #0f172a;
+    --sys-primary-container: #1e293b;
+    --sys-surface: #f8fafc;
+    --sys-surface-container-low: #f1f5f9;
     --sys-surface-container-highest: #ffffff;
-    --sys-on-surface: #1e1b15;
-    --sys-outline-variant: #d5c2c2;
-    --sys-secondary: #884e52;
-    --sys-surface-variant: #e8e2d7;
+    --sys-on-surface: #0f172a;
+    --sys-outline-variant: #e2e8f0;
+    --sys-secondary: #0284c7;
+    --sys-surface-variant: #e0f2fe;
 }
 
 * {

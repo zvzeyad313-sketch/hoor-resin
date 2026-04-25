@@ -5,7 +5,7 @@ export default function Footer() {
     <footer id="contact">
       <div className="footer-grid">
         <div className="footer-brand">
-          <span className="logo-f">HOOR <span>✦</span> Studio</span>
+          <span className="logo-f">HOOR <span>✦</span> Art</span>
           <p>متجر HOOR للرزن اليدوي - متخصصون في قطع فريدة مصنوعة بحب واهتمام. نصنع حلمك بأيدينا 💕</p>
           <div className="social-links">
             <a href="https://www.instagram.com/hoor_resin_" target="_blank" rel="noreferrer" className="social-link" aria-label="Instagram">📸</a>
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 HOOR Studio — جميع الحقوق محفوظة</span>
+        <span>© 2026 HOOR — جميع الحقوق محفوظة</span>
       </div>
     </footer>
   );

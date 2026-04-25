@@ -179,10 +179,10 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
         {/* Decorative Marquee */}
         <div className="marquee-section" aria-hidden="true">
           <div className="marquee-track">
-            {['رزن يدوي', 'مجوهرات فريدة', 'إكسسوارات مخصصة', 'هدايا مميزة', 'صنع بحب', 'HOOR Studio'].map((text, i) => (
+            {['رزن يدوي', 'مجوهرات فريدة', 'إكسسوارات مخصصة', 'هدايا مميزة', 'صنع بحب', 'HOOR Art'].map((text, i) => (
               <span key={i}>{text}<span className="dot">✦</span></span>
             ))}
-            {['رزن يدوي', 'مجوهرات فريدة', 'إكسسوارات مخصصة', 'هدايا مميزة', 'صنع بحب', 'HOOR Studio'].map((text, i) => (
+            {['رزن يدوي', 'مجوهرات فريدة', 'إكسسوارات مخصصة', 'هدايا مميزة', 'صنع بحب', 'HOOR Art'].map((text, i) => (
               <span key={i+10}>{text}<span className="dot">✦</span></span>
             ))}
           </div>

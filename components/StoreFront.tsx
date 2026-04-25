@@ -455,102 +455,125 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
         </div>
       </section>
 
-      {/* CUSTOM ORDER */}
-      <section className="custom-section fade-up" id="custom">
-        <div className="custom-text" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="custom-label">✦ خدمة مميزة</div>
-          <h2 className="custom-title">نصنعلك <em>حلمك</em><br/>بأيدينا 💕</h2>
-          <p className="custom-desc">
-            عايزة قطعة خاصة بيكِ؟ مكتوب عليها اسمك أو تاريخ مميز؟
-            احنا هنا عشان نحوّل كل فكرة في دماغك لقطعة رزن تحفة ✨
-          </p>
-          <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <button 
-               onClick={(e) => {
-                 e.preventDefault();
-                 if(!customOrder.colorShape && !customOrder.nameMessage && !customOrder.details) {
-                   alert("يرجى إدخال بعض تفاصيل الطلب الخاص أولاً!");
-                   return;
-                 }
-                 const product: Product = {
-                   id: 'custom-' + Date.now(),
-                   name: 'طلب خاص (Custom Order)',
-                   description: `اللون والشكل: ${customOrder.colorShape || 'غير محدد'} | الاسم/الرسالة: ${customOrder.nameMessage || 'بدون'} | الجليتر: ${customOrder.glitterType || 'بدون'} | الحجم: ${customOrder.size} | التفاصيل: ${customOrder.details || 'لا يوجد'}`,
-                   price: 0, 
-                   category: 'custom',
-                   image_url: '/placeholder.svg' 
-                 };
-                 addToCart(product);
-                 setCustomOrder({ colorShape: '', nameMessage: '', details: '', deliveryNotes: '', glitterType: '', size: 'medium' });
-               }}
-               className="btn-light" 
-               onMouseEnter={() => handleLinkHover(true)} 
-               onMouseLeave={() => handleLinkHover(false)}
-            >
-              إضافة الطلب الخاص للسلة 🛒
-            </button>
-            <p style={{ fontSize: '0.8rem', opacity: 0.8 }}>* السعر يتحدد بناءً على التفاصيل بعد التواصل</p>
+      {/* CUSTOM ORDER / STUDIO */}
+      <section className="studio-section fade-up" id="custom">
+        <div className="studio-container">
+          <div className="studio-content">
+            <div className="section-label">✦ استوديو التصميم اليدوي</div>
+            <h2 className="display-lg" style={{ marginBottom: '1.5rem' }}>صممي <em>قطعتك الفريدة</em> بنفسك</h2>
+            <p className="body-lg" style={{ marginBottom: '3rem', maxWidth: '500px', opacity: 0.8 }}>
+              سواء كنتِ تبحثين عن هدية لمناسبة خاصة أو تريدين قطعة فنية تعبر عن ذوقك، نحن هنا لنحول خيالك إلى واقع ملموس بدقة واحترافية.
+            </p>
+
+            <div className="studio-process">
+              <div className="process-step">
+                <div className="step-badge">01</div>
+                <div className="step-info">
+                  <h3>اختيار التصميم</h3>
+                  <p>حددي الألوان، الأشكال، والإضافات التي تفضلينها (ورد، ورق ذهب، صور).</p>
+                </div>
+              </div>
+              <div className="process-step">
+                <div className="step-badge">02</div>
+                <div className="step-info">
+                  <h3>التنفيذ اليدوي</h3>
+                  <p>نبدأ بصب الرزن يدوياً مع العناية بأدق التفاصيل لضمان أعلى جودة.</p>
+                </div>
+              </div>
+              <div className="process-step">
+                <div className="step-badge">03</div>
+                <div className="step-info">
+                  <h3>التغليف الفاخر</h3>
+                  <p>نغلف طلبك بعناية فائقة ليصلك كقطعة فنية تليق بكِ.</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="custom-visual">
-          <div className="custom-grid-inputs">
-            <div className="custom-item">
-              <div className="icon">🎨</div>
-              <label>الألوان والشكل</label>
-              <input 
-                type="text" 
-                className="custom-input" 
-                placeholder="مثال: أمواج زرقاء، ورد مجفف..."
-                value={customOrder.colorShape}
-                onChange={(e) => setCustomOrder(prev => ({ ...prev, colorShape: e.target.value }))}
-              />
-            </div>
-            <div className="custom-item">
-              <div className="icon">✍️</div>
-              <label>الاسم أو الرسالة</label>
-              <input 
-                type="text" 
-                className="custom-input" 
-                placeholder="الاسم المراد كتابته..."
-                value={customOrder.nameMessage}
-                onChange={(e) => setCustomOrder(prev => ({ ...prev, nameMessage: e.target.value }))}
-              />
-            </div>
-            <div className="custom-item">
-              <div className="icon">✨</div>
-              <label>نوع الجليتر / الإضافات</label>
-              <input 
-                type="text" 
-                className="custom-input" 
-                placeholder="ذهبي، فضي، نجوم..."
-                value={customOrder.glitterType}
-                onChange={(e) => setCustomOrder(prev => ({ ...prev, glitterType: e.target.value }))}
-              />
-            </div>
-            <div className="custom-item">
-              <div className="icon">📏</div>
-              <label>الحجم المطلوب</label>
-              <select 
-                className="custom-input"
-                value={customOrder.size}
-                onChange={(e) => setCustomOrder(prev => ({ ...prev, size: e.target.value }))}
-                style={{ appearance: 'none' }}
-              >
-                <option value="small">صغير (S)</option>
-                <option value="medium">متوسط (M)</option>
-                <option value="large">كبير (L)</option>
-              </select>
-            </div>
-            <div className="custom-item full-width">
-              <div className="icon">🌸</div>
-              <label>تفاصيل إضافية</label>
-              <textarea 
-                className="custom-input custom-textarea" 
-                placeholder="صفي لنا ما بداخل مخيلتك لنجعله حقيقة..."
-                value={customOrder.details}
-                onChange={(e) => setCustomOrder(prev => ({ ...prev, details: e.target.value }))}
-                rows={3}
-              />
+
+          <div className="studio-form-wrapper">
+            <div className="studio-card-glass">
+              <h3 className="body-lg" style={{ fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>تفاصيل طلبك الخاص</h3>
+              <div className="studio-grid">
+                <div className="input-group">
+                  <label className="label-sm">الألوان والشكل</label>
+                  <input 
+                    type="text" 
+                    placeholder="مثال: أمواج زرقاء، ورد مجفف..." 
+                    className="artisan-input"
+                    value={customOrder.colorShape}
+                    onChange={(e) => setCustomOrder(prev => ({ ...prev, colorShape: e.target.value }))}
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="label-sm">الاسم أو العبارة</label>
+                  <input 
+                    type="text" 
+                    placeholder="الاسم المراد كتابته" 
+                    className="artisan-input"
+                    value={customOrder.nameMessage}
+                    onChange={(e) => setCustomOrder(prev => ({ ...prev, nameMessage: e.target.value }))}
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="label-sm">نوع الجليتر / الإضافات</label>
+                  <input 
+                    type="text" 
+                    placeholder="ذهبي، فضي، نجوم..." 
+                    className="artisan-input"
+                    value={customOrder.glitterType}
+                    onChange={(e) => setCustomOrder(prev => ({ ...prev, glitterType: e.target.value }))}
+                  />
+                </div>
+                <div className="input-group">
+                  <label className="label-sm">الحجم المطلوب</label>
+                  <select 
+                    className="artisan-input"
+                    value={customOrder.size}
+                    onChange={(e) => setCustomOrder(prev => ({ ...prev, size: e.target.value }))}
+                  >
+                    <option value="small">صغير (S)</option>
+                    <option value="medium">متوسط (M)</option>
+                    <option value="large">كبير (L)</option>
+                  </select>
+                </div>
+                <div className="input-group full-width">
+                  <label className="label-sm">تفاصيل إضافية</label>
+                  <textarea 
+                    placeholder="صفي لنا ما بداخل مخيلتك لنجعله حقيقة..." 
+                    className="artisan-input"
+                    rows={3}
+                    value={customOrder.details}
+                    onChange={(e) => setCustomOrder(prev => ({ ...prev, details: e.target.value }))}
+                  />
+                </div>
+                <button 
+                  className="btn-primary-artisan"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if(!customOrder.colorShape && !customOrder.nameMessage && !customOrder.details) {
+                      alert("يرجى إدخال بعض تفاصيل الطلب الخاص أولاً!");
+                      return;
+                    }
+                    const product: Product = {
+                      id: 'custom-' + Date.now(),
+                      name: 'طلب خاص: ' + (customOrder.colorShape || 'تصميم يدوي'),
+                      description: `اللون: ${customOrder.colorShape} | الاسم: ${customOrder.nameMessage} | الجليتر: ${customOrder.glitterType} | الحجم: ${customOrder.size} | التفاصيل: ${customOrder.details}`,
+                      price: 0,
+                      category: 'custom',
+                      image_url: '/placeholder.svg'
+                    };
+                    addToCart(product);
+                    setCheckoutStep('info');
+                    setIsCartOpen(true);
+                  }}
+                  onMouseEnter={() => handleLinkHover(true)} 
+                  onMouseLeave={() => handleLinkHover(false)}
+                >
+                  <span>متابعة الطلب الخاص</span>
+                  <span>✦</span>
+                </button>
+              </div>
+              <p style={{ textAlign: 'center', fontSize: '0.8rem', opacity: 0.6, marginTop: '1.5rem' }}>* سيتم تحديد التكلفة النهائية بعد مراجعة التفاصيل</p>
             </div>
           </div>
         </div>

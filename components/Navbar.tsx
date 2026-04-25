@@ -13,7 +13,7 @@ export default function Navbar({ cartCount, isOrdering, handleCheckout, handleLi
   return (
     <header>
       <nav>
-        <a href="#" className="logo" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>Hoor <span>✦</span> Resin</a>
+        <a href="#" className="logo" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>HOOR <span>✦</span> Studio</a>
         <ul className="nav-links">
           <li><a href="#featured" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>المنتجات</a></li>
           <li><a href="#custom" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>طلبات خاصة</a></li>

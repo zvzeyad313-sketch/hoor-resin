@@ -15,11 +15,11 @@ export default function Hero({ handleLinkHover }: { handleLinkHover: (t: boolean
       <div className="hero-text fade-up">
         <div className="hero-tag"><span>✨</span> صنع بحب واهتمام</div>
         <h1 className="hero-title">
-          قطع رزن <em>فريدة</em><br />تحكي قصتك
+          تحف فنية <em>بيد</em><br />نفسك مع HOOR
         </h1>
         <p className="hero-sub">
-          كل قطعة من Hoor Resin Art هي تحفة يدوية مصنوعة بعناية فائقة.
-          من المجوهرات إلى الإكسسوارات — نصمم اللي بتحلم بيه 💕
+          كل قطعة من HOOR هي تحفة يدوية مصنوعة بعناية فائقة.
+          نصنع لكِ قطعاً فنية من الرزن تحكي قصتك وتزين مساحتك 💕
         </p>
         <div className="hero-btns">
           <a href="#featured" className="btn-primary" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>تسوق الآن ✦</a>
@@ -32,7 +32,7 @@ export default function Hero({ handleLinkHover }: { handleLinkHover: (t: boolean
           <div className="showcase-main">
             <Image
               src={logoImg}
-              alt="Hoor Resin Art Logo"
+              alt="HOOR Studio Logo"
               priority
               fill
               style={{ objectFit: 'cover' }}

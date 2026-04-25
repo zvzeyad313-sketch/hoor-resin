@@ -5,8 +5,8 @@ export default function Footer() {
     <footer id="contact">
       <div className="footer-grid">
         <div className="footer-brand">
-          <span className="logo-f">Hoor <span>✦</span> Resin</span>
-          <p>متجر رزن يدوي متخصص في قطع فريدة مصنوعة بحب واهتمام. نصنع حلمك بأيدينا 💕</p>
+          <span className="logo-f">HOOR <span>✦</span> Studio</span>
+          <p>متجر HOOR للرزن اليدوي - متخصصون في قطع فريدة مصنوعة بحب واهتمام. نصنع حلمك بأيدينا 💕</p>
           <div className="social-links">
             <a href="https://www.instagram.com/hoor_resin_" target="_blank" rel="noreferrer" className="social-link" aria-label="Instagram">📸</a>
             <a href="https://www.tiktok.com/@hoor40726676" target="_blank" rel="noreferrer" className="social-link" aria-label="TikTok">🎵</a>
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 Hoor Resin Art — جميع الحقوق محفوظة</span>
+        <span>© 2026 HOOR Studio — جميع الحقوق محفوظة</span>
         <span>تم التطوير بكل حب ❤️ بواسطة Ali Versel</span>
       </div>
     </footer>

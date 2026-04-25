@@ -15,7 +15,7 @@ export default function Hero({ handleLinkHover }: { handleLinkHover: (t: boolean
       <div className="hero-text fade-up">
         <div className="hero-tag"><span>✨</span> صنع بحب واهتمام</div>
         <h1 className="hero-title">
-          تحف فنية <em>بيد</em><br />نفسك مع HOOR
+          تحف فنية <em>بلمسة</em><br />إبداعية مع HOOR
         </h1>
         <p className="hero-sub">
           كل قطعة من HOOR هي تحفة يدوية مصنوعة بعناية فائقة.

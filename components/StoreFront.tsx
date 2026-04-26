@@ -6,6 +6,7 @@ import Hero from './Hero';
 import Footer from './Footer';
 import CartModal from './modals/CartModal';
 import ProductDetailsModal from './modals/ProductDetailsModal';
+import PaymentModal from './modals/PaymentModal';
 import FeaturedProducts from './sections/FeaturedProducts';
 import StudioSection from './studio/StudioSection';
 import WhyUs from './sections/WhyUs';

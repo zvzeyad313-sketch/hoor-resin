@@ -27,8 +27,8 @@ export async function POST(req: Request) {
       ]);
       
     if (error) {
-      console.error('Supabase error:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error('Supabase DB Error:', error);
+      return NextResponse.json({ error: error.message, code: error.code }, { status: 500 });
     }
     
     return NextResponse.json({ success: true, data });

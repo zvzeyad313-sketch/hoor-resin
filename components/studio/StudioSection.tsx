@@ -133,7 +133,7 @@ export default function StudioSection({
                 onMouseEnter={() => handleLinkHover(true)} 
                 onMouseLeave={() => handleLinkHover(false)}
               >
-                <span>اطلب الآن عبر واتساب</span>
+                <span>الاستمرار لبيانات الشحن</span>
                 <span>✦</span>
               </button>
             </div>

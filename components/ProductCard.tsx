@@ -49,7 +49,7 @@ export default function ProductCard({
             onClick={(e) => { e.stopPropagation(); addToCart(product); }}
             style={{ padding: '12px 24px', fontSize: '0.9rem', background: 'rgba(255,255,255,0.9)', border: 'none', color: 'var(--ink)' }}
           >
-            اطلب الآن عبر واتساب
+            إضافة للسلة ✦
           </button>
         </div>
 

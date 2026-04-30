@@ -160,7 +160,7 @@ export default function CartModal({
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center', width: '100%' }}>
                   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="" style={{ width: '24px', height: '24px', filter: 'brightness(0) invert(1)' }} />
-                  <span>{isOrdering ? 'جاري التحويل...' : 'اطلب الآن عبر واتساب'}</span>
+                  <span>{isOrdering ? 'جاري تجهيز طلبك...' : 'تأكيد الطلب عبر واتساب'}</span>
                 </div>
               </button>
             </div>

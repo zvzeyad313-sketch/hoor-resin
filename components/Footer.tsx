@@ -5,8 +5,10 @@ export default function Footer() {
     <footer id="contact">
       <div className="footer-grid">
         <div className="footer-brand">
-          <span className="logo-f">HOOR <span>✦</span> Art</span>
-          <p>متجر HOOR للرزن اليدوي - متخصصون في قطع فريدة مصنوعة بحب واهتمام. نصنع حلمك بأيدينا 💕</p>
+          <span className="logo-f">HOOR <span>✧</span></span>
+          <p>
+            "نحن لا نصنع مجرد إكسسوارات، نحن نخلد لحظاتكم في قطع فنية تدوم للأبد. HOOR هو شغف تجسد في مادة الرزن، ليصل إلى قلوبكم قبل منازلكم."
+          </p>
           <div className="social-links">
             <a href="https://www.instagram.com/hoor_resin_" target="_blank" rel="noreferrer" className="social-link" aria-label="Instagram">📸</a>
             <a href="https://www.tiktok.com/@hoor40726676" target="_blank" rel="noreferrer" className="social-link" aria-label="TikTok">🎵</a>
@@ -14,34 +16,35 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-col">
-          <h4>المتجر</h4>
+          <h4>المجموعات</h4>
           <ul>
-            <li><a href="#featured">جميع المنتجات</a></li>
-            <li><a href="#">مجوهرات</a></li>
-            <li><a href="#">ديكور</a></li>
-            <li><a href="#">هدايا</a></li>
+            <li><a href="#featured">القطع المختارة</a></li>
+            <li><a href="#featured">إصدارات محدودة</a></li>
+            <li><a href="#custom">الطلب الخاص</a></li>
           </ul>
         </div>
         <div className="footer-col">
-          <h4>خدماتنا</h4>
+          <h4>الاستوديو</h4>
           <ul>
-            <li><a href="#custom">طلبات خاصة</a></li>
-            <li><a href="#">هدايا بالجملة</a></li>
-            <li><a href="#">تعليم الرزن</a></li>
+            <li><a href="#custom">الكونسيرج</a></li>
+            <li><a href="#contact">تواصل مباشر</a></li>
+            <li><a href="#">قصتنا</a></li>
           </ul>
         </div>
         <div className="footer-col">
-          <h4>تواصل معنا</h4>
+          <h4>القوانين</h4>
           <ul>
-            <li><a href="https://www.instagram.com/hoor_resin_" target="_blank" rel="noreferrer">إنستاجرام</a></li>
-            <li><a href="https://www.tiktok.com/@hoor40726676" target="_blank" rel="noreferrer">تيك توك</a></li>
-            <li><a href="https://www.facebook.com/Caesarewear" target="_blank" rel="noreferrer">فيسبوك</a></li>
+            <li><a href="#">سياسة الشحن</a></li>
+            <li><a href="#">الاستبدال والاسترجاع</a></li>
+            <li><a href="#">الخصوصية</a></li>
           </ul>
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 HOOR — جميع الحقوق محفوظة</span>
+        <span>© 2026 HOOR ARTISAN STUDIO — القاهرة، مصر</span>
+        <span>صنع بحب ❤️ بواسطة Ali Versel</span>
       </div>
     </footer>
   );
 }
+

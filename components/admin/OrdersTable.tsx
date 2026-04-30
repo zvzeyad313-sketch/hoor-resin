@@ -56,7 +56,10 @@ export default function OrdersTable({ orders }: { orders: any[] }) {
         <tbody>
           {orders.map((order, index) => (
             <tr key={order.id}>
-              <td style={{ padding: '1rem', borderBottom: '1px solid #ddd', fontSize: '1.1rem', fontWeight: 'bold' }}>#{orders.length - index}</td>
+              <td style={{ padding: '1rem', borderBottom: '1px solid #ddd', fontSize: '1.1rem', fontWeight: 'bold' }}>
+                <div>#{orders.length - index}</div>
+                <div style={{ fontSize: '0.7rem', color: '#888', fontWeight: 'normal' }}>ID: {order.id.substring(0, 8)}...</div>
+              </td>
               <td suppressHydrationWarning style={{ padding: '1rem', borderBottom: '1px solid #ddd', direction: 'ltr', textAlign: 'right', whiteSpace: 'nowrap' }}>
                 {order.created_at ? new Date(order.created_at).toLocaleString('ar-EG') : '-'}
               </td>

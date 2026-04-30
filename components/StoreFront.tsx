@@ -6,8 +6,9 @@ import Hero from './Hero';
 import Footer from './Footer';
 import CartModal from './modals/CartModal';
 import ProductDetailsModal from './modals/ProductDetailsModal';
-import PaymentModal from './modals/PaymentModal';
+import OrderTrackingModal from './modals/OrderTrackingModal';
 import FeaturedProducts from './sections/FeaturedProducts';
+import Craftsmanship from './sections/Craftsmanship';
 import StudioSection from './studio/StudioSection';
 import WhyUs from './sections/WhyUs';
 import Testimonials from './sections/Testimonials';
@@ -35,48 +36,13 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('الكل');
-  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
   const [isOrdering, setIsOrdering] = useState(false);
+  const [isTrackOpen, setIsTrackOpen] = useState(false);
 
   // --- REFS & HOOKS ---
   const isOrderingRef = useRef(false);
 
-  const confirmPayment = async () => {
-    setIsOrdering(true);
-    isOrderingRef.current = true;
-    try {
-      const total = cart.reduce((acc, p) => acc + p.price, 0);
-      
-      const res = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          items: cart, 
-          total,
-          customer_name: customerInfo.name,
-          customer_phone: customerInfo.phone,
-          customer_address: customerInfo.address,
-          notes: customerInfo.notes
-        })
-      });
-      
-      if (!res.ok) throw new Error('Failed to log order');
-      
-      const itemsText = cart.map(item => `- ${item.name} (${item.price} ج.م)`).join('%0A');
-      const infoText = `الاسم: ${customerInfo.name}%0Aالهاتف: ${customerInfo.phone}%0Aالعنوان: ${customerInfo.address}${customerInfo.notes ? `%0Aملاحظات: ${customerInfo.notes}` : ''}`;
-      const message = `مرحباً هوور، تم تأكيد الدفع لطلبي:%0A${itemsText}%0A%0Aإجمالي المبلغ: ${total} ج.م%0A%0Aبيانات الشحن:%0A${infoText}`;
-      const waNumber = '201128025204'; 
-      window.location.href = `https://wa.me/${waNumber}?text=${message}`;
-    } catch (err) {
-      console.error(err);
-      alert('حدث خطأ أثناء معالجة الطلب، يرجى المحاولة مرة أخرى.');
-    } finally {
-      isOrderingRef.current = false;
-      setIsOrdering(false);
-      setIsPaymentOpen(false);
-    }
-  };
   const { cursorRef, ringRef, handleLinkHover, setCursorVisibility } = useCustomCursor();
 
   // --- EFFECTS ---
@@ -149,13 +115,27 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
         })
       });
       
-      if (!res.ok) throw new Error('Failed to log order');
+      const resData = await res.json();
+      const orderId = resData.data?.[0]?.id || 'غير متوفر';
       
-      const itemsText = cart.map(item => `- ${item.name} (${item.price} ج.م)`).join('%0A');
-      const infoText = `الاسم: ${customerInfo.name}%0Aالهاتف: ${customerInfo.phone}%0Aالعنوان: ${customerInfo.address}${customerInfo.notes ? `%0Aملاحظات: ${customerInfo.notes}` : ''}`;
-      const message = `مرحباً هوور، أود طلب هذه المنتجات:%0A${itemsText}%0A%0Aإجمالي المبلغ: ${total} ج.م%0A%0Aبيانات الشحن:%0A${infoText}`;
-      const waNumber = '201128025204'; 
-      window.location.href = `https://wa.me/${waNumber}?text=${message}`;
+      if (!res.ok) throw new Error('Failed to log order');
+
+      alert(`تم تسجيل طلبك بنجاح! رقم الطلب الخاص بك هو: #${orderId.substring(0, 8)} - يمكنك استخدامه لتتبع حالة الطلب من الموقع.`);
+      
+      let message = '';
+
+      if (cart.length === 1) {
+        message = `أرغب في طلب المنتج: ${cart[0].name} - السعر: ${cart[0].price} جنيه`;
+      } else {
+        const itemsText = cart.map(item => `• ${item.name} (${item.price} ج.م)`).join('%0A');
+        message = `أرغب في طلب المنتجات التالية:%0A${itemsText}%0A%0Aالإجمالي: ${total} ج.م`;
+      }
+
+      const infoText = `%0A%0Aرقم الطلب: #${orderId}%0A%0Aبيانات الشحن:%0Aالاسم: ${customerInfo.name}%0Aالهاتف: ${customerInfo.phone}%0Aالعنوان: ${customerInfo.address}${customerInfo.notes ? `%0Aملاحظات: ${customerInfo.notes}` : ''}`;
+      message += infoText;
+
+      const waNumber = '201207147650'; 
+      window.location.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(message.replace(/\\n/g, '\n'))}`;
     } catch (err) {
       console.error(err);
       alert('حدث خطأ أثناء معالجة الطلب، يرجى المحاولة مرة أخرى.');
@@ -186,6 +166,7 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
         cartCount={cart.length} 
         isOrdering={isOrdering} 
         handleCheckout={(e) => { e.preventDefault(); setIsCartOpen(true); }} 
+        handleTrack={() => setIsTrackOpen(true)}
         handleLinkHover={handleLinkHover} 
       />
       
@@ -210,12 +191,10 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
         addToCart={addToCart}
         handleLinkHover={handleLinkHover}
       />
-      
-      <PaymentModal 
-        isOpen={isPaymentOpen}
-        onClose={() => setIsPaymentOpen(false)}
-        onConfirm={confirmPayment}
-        isOrdering={isOrdering}
+
+      <OrderTrackingModal 
+        isOpen={isTrackOpen}
+        onClose={() => setIsTrackOpen(false)}
         handleLinkHover={handleLinkHover}
       />
       
@@ -233,6 +212,8 @@ export default function StoreFront({ initialProducts }: { initialProducts: Produ
             ))}
           </div>
         </div>
+
+        <Craftsmanship />
 
         {/* Section: Products */}
         <FeaturedProducts 

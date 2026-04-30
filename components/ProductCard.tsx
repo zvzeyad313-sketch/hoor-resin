@@ -24,7 +24,6 @@ export default function ProductCard({
     <div className="product-card fade-up">
       <div 
         className="product-img" 
-        style={{ cursor: 'pointer' }} 
         onClick={() => onShowDetails(product)}
         onMouseEnter={() => handleLinkHover(true)} 
         onMouseLeave={() => handleLinkHover(false)}
@@ -32,29 +31,49 @@ export default function ProductCard({
         <img 
           src={product.image_url || '/placeholder.svg'} 
           alt={product.name}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           onError={(e) => {
             (e.target as HTMLImageElement).src = '/placeholder.svg';
           }}
         />
-        {product.category === 'sale' && <span className="product-badge badge-sale">خصم</span>}
-        {product.category === 'new' && <span className="product-badge badge-new">جديد</span>}
+        
+        <div className="product-overlay-actions">
+          <button 
+            className="btn-primary" 
+            onClick={(e) => { e.stopPropagation(); onShowDetails(product); }}
+            style={{ padding: '12px 24px', fontSize: '0.9rem' }}
+          >
+            عرض التفاصيل ✧
+          </button>
+          <button 
+            className="btn-secondary" 
+            onClick={(e) => { e.stopPropagation(); addToCart(product); }}
+            style={{ padding: '12px 24px', fontSize: '0.9rem', background: 'rgba(255,255,255,0.9)', border: 'none', color: 'var(--ink)' }}
+          >
+            اطلب الآن عبر واتساب
+          </button>
+        </div>
+
+        {product.category === 'sale' && <span className="product-badge badge-sale">عرض</span>}
+        {product.category === 'new' && <span className="product-badge badge-new">فريد</span>}
       </div>
+
       <div className="product-info">
-        <div className="product-cat">{product.category || 'منتجات'}</div>
-        <div 
+        <div className="product-cat">{product.category || 'مجموعة الفن'}</div>
+        <h3 
           className="product-name" 
-          style={{ cursor: 'pointer' }}
           onClick={() => onShowDetails(product)}
           onMouseEnter={() => handleLinkHover(true)} 
           onMouseLeave={() => handleLinkHover(false)}
-        >{product.name}</div>
-        <div className="product-desc">{product.description}</div>
-        <div className="product-bottom">
-          <div className="product-price"><span className="currency">ج.م </span>{product.price}</div>
-          <button className="btn-add" onClick={() => addToCart(product)} onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>أضف للسلة +</button>
+          style={{ cursor: 'pointer' }}
+        >
+          {product.name}
+        </h3>
+        <div className="product-price">
+          <span className="currency">ج.م </span>
+          {product.price}
         </div>
       </div>
     </div>
   );
 }
+

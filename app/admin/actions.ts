@@ -170,3 +170,19 @@ export async function deleteOrder(id: string) {
   revalidatePath('/admin');
   return { success: true };
 }
+
+export async function trackOrder(orderId: string) {
+  const id = orderId.replace('#', '').trim();
+  
+  const { data, error } = await supabase
+    .from('orders')
+    .select('status')
+    .eq('id', id)
+    .single();
+
+  if (error || !data) {
+    return { success: false };
+  }
+
+  return { success: true, status: data.status };
+}

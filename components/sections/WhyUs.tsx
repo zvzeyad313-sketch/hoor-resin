@@ -9,17 +9,17 @@ export default function WhyUs() {
   ];
 
   return (
-    <section className="why fade-up" id="about">
+    <section className="why fade-up" id="about" style={{ background: 'var(--cream-dark)', padding: '120px 60px' }}>
       <div className="section-header">
-        <span className="section-label">✦ ليه Hoor</span>
-        <h2 className="section-title">لأننا <em>نهتم</em> بكل تفصيلة</h2>
+        <span className="label-sm">قيمنا الفنية</span>
+        <h2 className="display-lg">لماذا <em>HOOR</em>؟</h2>
       </div>
-      <div className="why-grid">
+      <div className="why-grid" style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {reasons.map((reason, i) => (
-          <div key={i} className="why-card">
-            <span className="why-icon" aria-hidden="true">{reason.icon}</span>
-            <h3 className="why-title">{reason.title}</h3>
-            <p className="why-desc">{reason.desc}</p>
+          <div key={i} className="why-card" style={{ background: 'white', borderRadius: '4px' }}>
+            <span className="why-icon" aria-hidden="true" style={{ filter: 'grayscale(1)', opacity: 0.8 }}>{reason.icon}</span>
+            <h3 className="why-title" style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>{reason.title}</h3>
+            <p className="why-desc" style={{ fontSize: '0.9rem', opacity: 0.7 }}>{reason.desc}</p>
           </div>
         ))}
       </div>

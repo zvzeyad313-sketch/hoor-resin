@@ -9,7 +9,7 @@ type Product = {
   image_url: string;
 };
 
-export default function Navbar({ cartCount, isOrdering, handleCheckout, handleLinkHover }: { cartCount: number, isOrdering: boolean, handleCheckout: (e: React.MouseEvent) => void, handleLinkHover: (t: boolean) => void }) {
+export default function Navbar({ cartCount, isOrdering, handleCheckout, handleTrack, handleLinkHover }: { cartCount: number, isOrdering: boolean, handleCheckout: (e: React.MouseEvent) => void, handleTrack: () => void, handleLinkHover: (t: boolean) => void }) {
   return (
     <header>
       <nav>
@@ -17,6 +17,7 @@ export default function Navbar({ cartCount, isOrdering, handleCheckout, handleLi
         <ul className="nav-links">
           <li><a href="#featured" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>المنتجات</a></li>
           <li><a href="#custom" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>طلبات خاصة</a></li>
+          <li><a href="#track" onClick={(e) => { e.preventDefault(); handleTrack(); }} onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>تتبع الطلب</a></li>
           <li><a href="#about" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>من نحن</a></li>
           <li><a href="#contact" onMouseEnter={() => handleLinkHover(true)} onMouseLeave={() => handleLinkHover(false)}>تواصل معنا</a></li>
         </ul>

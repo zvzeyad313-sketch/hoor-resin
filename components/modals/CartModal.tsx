@@ -154,12 +154,14 @@ export default function CartModal({
               <button 
                 type="submit"
                 form="checkoutForm"
-                className="btn-primary-artisan" 
+                className="btn-primary-artisan whatsapp-btn-checkout" 
                 disabled={isOrdering}
-                style={{ flex: 2 }}
+                style={{ flex: 2, background: '#25D366', color: 'white' }}
               >
-                <span>{isOrdering ? 'جاري التحويل...' : 'تأكيد الطلب عبر واتساب'}</span>
-                <span>✦</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center', width: '100%' }}>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="" style={{ width: '24px', height: '24px', filter: 'brightness(0) invert(1)' }} />
+                  <span>{isOrdering ? 'جاري التحويل...' : 'اطلب الآن عبر واتساب'}</span>
+                </div>
               </button>
             </div>
           )}

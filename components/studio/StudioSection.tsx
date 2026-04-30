@@ -42,28 +42,29 @@ export default function StudioSection({
     <section className="studio-section fade-up" id="custom">
       <div className="studio-container">
         <div className="studio-content">
-          <span className="section-label">✦ استوديو التصميم اليدوي</span>
-          <h2 className="section-title">صممي <em>قطعتك الفريدة</em> بنفسك</h2>
+          <span className="label-sm">تجربة فريدة</span>
+          <h2 className="display-lg">الكونسيرج <em>الخاص</em></h2>
           <p className="body-lg" style={{ marginBottom: '3rem', maxWidth: '500px', opacity: 0.8 }}>
-            سواء كنتِ تبحثين عن هدية لمناسبة خاصة أو تريدين قطعة فنية تعبر عن ذوقك، نحن هنا لنحول خيالك إلى واقع ملموس بدقة واحترافية.
+            في HOOR، نؤمن أن كل عميل هو فنان بطبعه. استوديو "الكونسيرج" هو بوابتك لتحويل رؤيتك الشخصية إلى قطعة أثرية فريدة تصنع يدوياً من أجلك فقط.
           </p>
 
           <div className="studio-process">
             {[
-              { num: '01', title: 'اختيار التصميم', desc: 'حددي الألوان، الأشكال، والإضافات التي تفضلينها (ورد، ورق ذهب، صور).' },
-              { num: '02', title: 'التنفيذ اليدوي', desc: 'نبدأ بصب الرزن يدوياً مع العناية بأدق التفاصيل لضمان أعلى جودة.' },
-              { num: '03', title: 'التغليف الفاخر', desc: 'نغلف طلبك بعناية فائقة ليصلك كقطعة فنية تليق بكِ.' }
+              { num: 'I', title: 'صياغة الرؤية', desc: 'نبدأ بالاستماع لأفكارك، الألوان المفضلة، والمناسبة التي تخلدها هذه القطعة.' },
+              { num: 'II', title: 'الاختيار الدقيق', desc: 'ننسق بين أنواع الرزن، المعادن، والزهور الطبيعية للوصول لأفضل تركيبة.' },
+              { num: 'III', title: 'التجسيد الفني', desc: 'يتم صب القطعة في استوديو HOOR بكل حب، لتخرج كتحفة فنية لا تتكرر.' }
             ].map(step => (
               <div key={step.num} className="process-step">
-                <div className="step-badge" aria-hidden="true">{step.num}</div>
+                <div className="step-badge" aria-hidden="true" style={{ fontFamily: 'serif', fontStyle: 'italic', background: 'var(--gold)', color: 'white' }}>{step.num}</div>
                 <div className="step-info">
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '0.25rem' }}>{step.title}</h3>
+                  <p style={{ fontSize: '0.85rem' }}>{step.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
 
         <div className="studio-form-wrapper">
           <div className="studio-card-glass">
@@ -132,7 +133,7 @@ export default function StudioSection({
                 onMouseEnter={() => handleLinkHover(true)} 
                 onMouseLeave={() => handleLinkHover(false)}
               >
-                <span>متابعة الطلب الخاص</span>
+                <span>اطلب الآن عبر واتساب</span>
                 <span>✦</span>
               </button>
             </div>

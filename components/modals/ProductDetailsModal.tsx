@@ -92,7 +92,7 @@ export default function ProductDetailsModal({
                   onMouseEnter={() => handleLinkHover(true)} 
                   onMouseLeave={() => handleLinkHover(false)}
                 >
-                  <span>أضف للسلة الآن</span>
+                  <span>اطلب الآن عبر واتساب</span>
                   <span>✦</span>
                 </button>
               </div>
